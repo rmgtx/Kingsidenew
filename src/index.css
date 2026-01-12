@@ -1,0 +1,111 @@
+/* Google Fonts Import - Must come before tailwindcss */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Raleway:wght@400;500;600&display=swap');
+
+@import "tailwindcss";
+
+/* ============================================
+   KINGSIDE GROUP - Brand Theme Configuration
+   Using shadcn/ui CSS variable conventions
+   ============================================ */
+
+@theme {
+  /* Brand Colors - Modern SaaS Theme */
+  --color-background: #ffffff;
+  --color-foreground: #111111;
+
+  --color-primary: #111111;
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #f4f4f5;
+  --color-secondary-foreground: #111111;
+
+  --color-accent: #2AA8F3;
+  --color-accent-foreground: #ffffff;
+
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+
+  --color-muted: #f4f4f5;
+  --color-muted-foreground: #71717a;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #111111;
+
+  --color-popover: #ffffff;
+  --color-popover-foreground: #111111;
+
+  --color-border: #e4e4e7;
+  --color-input: #e4e4e7;
+  --color-ring: #2AA8F3;
+
+  /* Chart/Animation Colors */
+  --color-chart-1: #2AA8F3;
+  --color-chart-2: #ef4444;
+  --color-chart-3: #f59e0b;
+  --color-chart-4: #22c55e;
+  --color-chart-5: #a855f7;
+
+  /* Typography */
+  --font-heading: "Poppins", system-ui, sans-serif;
+  --font-body: "Raleway", system-ui, sans-serif;
+
+  /* Border Radius - Modern SaaS (rounded) */
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+/* Base Styles */
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+/* Focus Styles for Accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+}
+
+/* Selection Styling */
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-accent-foreground);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Utilities */
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 20px currentColor);
+}
+
+/* Modern SaaS shadow utilities */
+.shadow-soft {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+.shadow-elevated {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
