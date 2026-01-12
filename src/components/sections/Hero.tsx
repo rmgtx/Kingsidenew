@@ -3,9 +3,9 @@ import { NeuBrutalistButton } from "@/components";
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-background">
+    <section className="relative overflow-hidden bg-background">
       {/* Main content */}
-      <div className="relative z-10 mx-auto max-w-7xl w-full px-6 lg:px-8 py-24 lg:py-32">
+      <div className="relative z-10 mx-auto max-w-7xl w-full px-6 lg:px-8 pt-32 lg:pt-40 pb-24 lg:pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left column - Text content */}
           <div className="max-w-xl">
@@ -77,7 +77,7 @@ export function Hero() {
             <motion.div 
               className="absolute pointer-events-none"
               style={{
-                background: 'linear-gradient(135deg, #2AA8F3 0%, #2AA8F3 100%)',
+                background: 'linear-gradient(135deg, #20A4F3 0%, #20A4F3 100%)',
                 filter: 'blur(60px)',
                 borderRadius: '50%',
                 // Fixed positioning from browser adjustments
@@ -114,7 +114,7 @@ export function Hero() {
                 alt="Marketing professional with smartphone"
                 className="relative z-10 w-full max-w-[224px] sm:max-w-[269px] lg:max-w-[314px] xl:max-w-[358px] h-auto object-contain"
                 style={{
-                  filter: 'drop-shadow(-20px 0 40px rgba(42, 168, 243, 0.25))',
+                  filter: 'drop-shadow(-20px 0 40px rgba(32, 164, 243, 0.25))',
                 }}
                 onError={(e) => {
                   // Hide image container if it fails to load

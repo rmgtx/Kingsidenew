@@ -18,11 +18,12 @@ export function Footer() {
             viewport={{ once: true }}
             className="lg:col-span-5 space-y-6"
           >
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center bg-background text-foreground font-bold text-xl rounded-lg">
-                ♔
-              </div>
-              <span className="font-heading text-2xl font-bold tracking-tight">KINGSIDE</span>
+            <div className="flex items-center">
+              <img 
+                src="/kingside-wordmark.svg" 
+                alt="Kingside" 
+                className="h-12 w-auto"
+              />
             </div>
             <p className="text-primary-foreground/70 text-lg max-w-sm">
               Put your busy work in check. We help small businesses scale smarter with intelligent automation.

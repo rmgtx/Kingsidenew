@@ -19,7 +19,7 @@
   --color-secondary: #f4f4f5;
   --color-secondary-foreground: #111111;
 
-  --color-accent: #2AA8F3;
+  --color-accent: #20A4F3;
   --color-accent-foreground: #ffffff;
 
   --color-destructive: #ef4444;
@@ -36,10 +36,10 @@
 
   --color-border: #e4e4e7;
   --color-input: #e4e4e7;
-  --color-ring: #2AA8F3;
+  --color-ring: #20A4F3;
 
   /* Chart/Animation Colors */
-  --color-chart-1: #2AA8F3;
+  --color-chart-1: #20A4F3;
   --color-chart-2: #ef4444;
   --color-chart-3: #f59e0b;
   --color-chart-4: #22c55e;

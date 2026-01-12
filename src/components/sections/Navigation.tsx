@@ -43,11 +43,13 @@ export function Navigation() {
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3 group">
-          <div className="flex h-10 w-10 items-center justify-center bg-primary text-primary-foreground font-bold text-xl rounded-lg transition-transform group-hover:scale-105">
-            ♔
-          </div>
-          <span className="font-heading text-xl font-bold tracking-tight">KINGSIDE</span>
+        <a href="#" className="flex items-center group transition-transform hover:scale-105">
+          <img 
+            src="/kingside-wordmark.svg?v=2" 
+            alt="Kingside" 
+            className="h-10 w-auto"
+            style={{ display: 'block', maxWidth: 'none' }}
+          />
         </a>
 
         {/* Desktop Nav */}
@@ -79,8 +81,13 @@ export function Navigation() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] border-l border-border bg-background">
               <SheetHeader>
-                <SheetTitle className="text-left font-heading text-2xl font-bold flex items-center gap-2">
-                  <span className="text-3xl">♔</span> Menu
+                <SheetTitle className="text-left font-heading text-2xl font-bold flex items-center gap-3">
+                  <img 
+                    src="/kingside-wordmark.svg" 
+                    alt="Kingside" 
+                    className="h-8 w-auto"
+                  />
+                  <span>Menu</span>
                 </SheetTitle>
               </SheetHeader>
               <div className="mt-12 flex flex-col gap-6">

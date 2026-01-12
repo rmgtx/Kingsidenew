@@ -16,7 +16,7 @@ export function ConfirmationModal({ isOpen, setIsOpen }: ConfirmationModalProps)
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 grid place-items-center z-[100] px-4"
+          className="fixed inset-0 grid place-items-center z-50 px-4"
           style={{
             backgroundColor: 'rgba(17, 17, 17, 0.3)',
             backdropFilter: 'blur(4px)',
@@ -34,17 +34,11 @@ export function ConfirmationModal({ isOpen, setIsOpen }: ConfirmationModalProps)
             onClick={(e) => e.stopPropagation()}
             className="relative w-full max-w-md"
           >
-            {/* Shadow */}
-            <div
-              className="absolute inset-0 border-2 bg-accent border-border rounded-xl"
-              style={{ transform: 'translate(8px, 8px)' }}
-            />
-
             {/* Modal */}
-            <div className="relative border-2 p-8 bg-background border-border rounded-xl">
+            <div className="relative border p-8 bg-background border-border rounded-xl shadow-lg">
               <div className="flex flex-col items-center">
                 {/* Icon */}
-                <div className="w-16 h-16 flex items-center justify-center mb-4 border-2 border-accent rounded-full bg-accent/10">
+                <div className="w-16 h-16 flex items-center justify-center mb-4 border border-accent rounded-full bg-accent/10">
                   <CheckCircle size={32} className="text-accent" weight="bold" />
                 </div>
 
@@ -61,7 +55,7 @@ export function ConfirmationModal({ isOpen, setIsOpen }: ConfirmationModalProps)
                 {/* Button */}
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="w-full sm:w-auto px-8 py-3 border-2 bg-primary text-primary-foreground border-primary rounded-lg font-body font-semibold hover:opacity-90 transition-opacity"
+                  className="w-full sm:w-auto px-8 py-3 border bg-primary text-primary-foreground border-primary rounded-lg font-body font-semibold hover:opacity-90 transition-opacity"
                 >
                   Close
                 </button>

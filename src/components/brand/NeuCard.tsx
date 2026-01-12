@@ -17,7 +17,7 @@ export function NeuCard({
       className={cn(
         "rounded-xl border bg-card",
         variant === "elevated" && "shadow-lg",
-        variant === "default" && "shadow-sm hover:shadow-md transition-shadow",
+        variant === "default" && "shadow-lg hover:shadow-xl transition-shadow",
         className
       )}
       {...props}

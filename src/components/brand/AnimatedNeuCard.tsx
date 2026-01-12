@@ -70,7 +70,7 @@ export function AnimatedNeuCard({
         onMouseMove={handleMove}
         onMouseLeave={handleReset}
         className={cn(
-          "relative h-full rounded-xl border bg-card shadow-sm hover:shadow-lg transition-shadow cursor-pointer",
+          "relative h-full rounded-xl border bg-card shadow-lg hover:shadow-xl transition-shadow cursor-pointer",
           className
         )}
       >

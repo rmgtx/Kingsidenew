@@ -74,7 +74,7 @@ function BentoCard({
     >
       {/* Clean card with subtle shadow */}
       <div 
-        className={`rounded-xl border bg-card p-8 lg:p-10 h-full shadow-sm hover:shadow-lg transition-shadow duration-300 ${className}`}
+        className={`rounded-xl border bg-card p-8 lg:p-10 h-full shadow-lg hover:shadow-xl transition-shadow duration-300 ${className}`}
       >
         {children}
       </div>
