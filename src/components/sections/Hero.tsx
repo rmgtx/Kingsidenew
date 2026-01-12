@@ -55,7 +55,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-xs sm:text-sm font-medium tracking-widest uppercase text-muted-foreground mb-6"
             >
-              Virtual Engagement Maximized & AI-Powered Content Transformation
+              AI Automation for Growth-Minded Founders
             </motion.p>
 
             {/* Main headline */}
@@ -65,7 +65,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6"
             >
-              Presentation Platform for Marketing Professionals
+              Stop Playing Defense. Put Your Busywork in Check.
             </motion.h1>
 
             {/* Subheadline */}
@@ -75,7 +75,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-10"
             >
-              Kingside helps businesses build and implement AI strategies so they can focus on what matters most
+              You didn't start a business to drown in spreadsheets. We build intelligent AI agents that handle the admin, operations, and repetitive grind so you can focus on the moves that actually scale revenue.
             </motion.p>
 
             {/* CTAs */}
