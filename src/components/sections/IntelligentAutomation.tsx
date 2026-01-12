@@ -4,6 +4,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { NeuBrutalistButton } from "@/components";
 import { Badge } from "@/components/ui/badge";
 import { Megaphone, TrendUp, Gear, Headset } from "@phosphor-icons/react";
+import { Card, CardContent } from "@/components/ui/card";
 
 const features = [
   {
@@ -94,7 +95,7 @@ export function IntelligentAutomation() {
           </motion.div>
 
           {/* Tab Content with Animation */}
-          <div className="relative min-h-[400px]">
+          <div className="relative min-h-96">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -131,8 +132,9 @@ export function IntelligentAutomation() {
 
                 {/* Visual Column - Clean card with subtle shadow */}
                 <div className="lg:col-span-2">
-                  <div className="relative aspect-square rounded-xl border bg-card shadow-lg flex items-center justify-center">
-                    <div className="text-center p-8">
+                  <Card className="aspect-square shadow-lg">
+                    <CardContent className="p-8 h-full flex items-center justify-center">
+                      <div className="text-center">
                       <activeFeature.icon 
                         size={80} 
                         weight="duotone" 
@@ -140,8 +142,9 @@ export function IntelligentAutomation() {
                       />
                       <p className="font-heading font-semibold text-lg">{activeFeature.label}</p>
                       <p className="text-sm text-muted-foreground">Automation</p>
-                    </div>
-                  </div>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
               </motion.div>
             </AnimatePresence>

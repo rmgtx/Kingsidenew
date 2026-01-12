@@ -1,4 +1,4 @@
-import { NeuCard } from "@/components";
+import { Card, CardContent } from "@/components/ui/card";
 
 export function MrBottleneck() {
   return (
@@ -18,15 +18,17 @@ export function MrBottleneck() {
             </p>
           </div>
 
-          {/* Image Placeholder in NeuCard */}
+          {/* Image Placeholder in Card */}
           <div className="flex justify-center lg:justify-end">
-             <NeuCard shadow="destructive" className="w-full max-w-md aspect-[4/5] flex items-center justify-center bg-muted/20">
-                <div className="text-center p-6">
-                   <div className="text-6xl mb-4">👔</div>
-                   <p className="font-heading font-bold text-xl">Mr. Bottleneck</p>
-                   <p className="text-sm text-muted-foreground">(Image Placeholder)</p>
+            <Card className="w-full max-w-md h-96 bg-muted/20 shadow-lg">
+              <CardContent className="h-full flex items-center justify-center p-6">
+                <div className="text-center">
+                  <div className="text-6xl mb-4">👔</div>
+                  <p className="font-heading font-bold text-xl">Mr. Bottleneck</p>
+                  <p className="text-sm text-muted-foreground">(Image Placeholder)</p>
                 </div>
-             </NeuCard>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

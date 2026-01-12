@@ -2,6 +2,7 @@ import { motion, useInView } from "motion/react";
 import { useRef, useEffect, useState } from "react";
 import { Crown, Shield, Star } from "@phosphor-icons/react";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 
 // Animated counter component
 function AnimatedCounter({ 
@@ -48,7 +49,7 @@ function AnimatedCounter({
 function BentoCard({ 
   children, 
   className = "",
-  accentColor = "accent",
+  accentColor: _accentColor = "accent",
   delay = 0,
   span = "1"
 }: { 
@@ -72,12 +73,11 @@ function BentoCard({
       transition={{ duration: 0.5, delay }}
       className={`relative ${spanClasses[span]}`}
     >
-      {/* Clean card with subtle shadow */}
-      <div 
-        className={`rounded-xl border bg-card p-8 lg:p-10 h-full shadow-lg hover:shadow-xl transition-shadow duration-300 ${className}`}
-      >
-        {children}
-      </div>
+      <Card className={`h-full shadow-lg hover:shadow-xl transition-shadow duration-300 ${className}`}>
+        <CardContent className="p-8 lg:p-10">
+          {children}
+        </CardContent>
+      </Card>
     </motion.div>
   );
 }

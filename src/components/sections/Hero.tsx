@@ -1,14 +1,53 @@
+import React from "react";
 import { motion } from "motion/react";
-import { NeuBrutalistButton } from "@/components";
+import { NeuBrutalistButton, GridPattern } from "@/components";
 
 export function Hero() {
+  const gridContainerRef = React.useRef<HTMLDivElement>(null);
+  const [isHovering, setIsHovering] = React.useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (!gridContainerRef.current) return;
+    
+    const rect = gridContainerRef.current.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    
+    // Calculate the snapped grid coordinates (30px grid size)
+    const gridSize = 30;
+    const col = Math.floor(mouseX / gridSize);
+    const row = Math.floor(mouseY / gridSize);
+    
+    const squareX = col * gridSize;
+    const squareY = row * gridSize;
+    
+    gridContainerRef.current.style.setProperty('--mouse-x', `${mouseX}px`);
+    gridContainerRef.current.style.setProperty('--mouse-y', `${mouseY}px`);
+    gridContainerRef.current.style.setProperty('--grid-x', `${squareX}px`);
+    gridContainerRef.current.style.setProperty('--grid-y', `${squareY}px`);
+  };
+
   return (
-    <section className="relative overflow-hidden bg-background">
+    <section 
+      className="relative overflow-hidden bg-background group"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      {/* Grid Pattern Background */}
+      <div ref={gridContainerRef} className={`absolute inset-0 z-0 ${isHovering ? 'grid-hovering' : ''}`}>
+        <GridPattern 
+          width={30} 
+          height={30} 
+          className="opacity-100"
+        />
+      </div>
+
       {/* Main content */}
-      <div className="relative z-10 mx-auto max-w-7xl w-full px-6 lg:px-8 pt-32 lg:pt-40 pb-24 lg:pb-32">
+      <div className="relative z-10 mx-auto max-w-7xl w-full px-6 lg:px-8 pt-32 lg:pt-40 pb-24 lg:pb-32 pointer-events-none">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left column - Text content */}
-          <div className="max-w-xl">
+          <div className="max-w-xl pointer-events-auto">
             {/* Eyebrow text */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -24,7 +63,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6"
+              className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6"
             >
               Presentation Platform for Marketing Professionals
             </motion.h1>
@@ -68,39 +107,22 @@ export function Hero() {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="relative flex justify-center lg:justify-end"
+            className="relative flex justify-center lg:justify-end pointer-events-auto"
           >
             {/* ============================================
                 ANIMATED BLUE GLOW EFFECT - Hero Background
                 Starts behind marketing image, expands right-to-left
                 ============================================ */}
-            <motion.div 
-              className="absolute pointer-events-none"
-              style={{
-                background: 'linear-gradient(135deg, #20A4F3 0%, #20A4F3 100%)',
-                filter: 'blur(60px)',
-                borderRadius: '50%',
-                // Fixed positioning from browser adjustments
-                left: '203px',
-                top: '-22px',
-                width: '150px',
-                height: '150px',
-                transformOrigin: 'center center',
-              }}
-              initial={{
-                // Start small, positioned behind image
-                scale: 0.25,
-                opacity: 0.15,
-              }}
+            <motion.div
+              className="absolute pointer-events-none right-0 top-1/2 -translate-y-1/2 h-40 w-40 rounded-full bg-accent/30 blur-3xl"
+              initial={{ x: 64, y: 0, scale: 0.25, opacity: 0.15 }}
               animate={{
-                // Expand from right to left
-                x: [0, -80, -160, -240],
+                x: [64, -80, -160, -240],
                 y: [0, -5, -10, -15],
                 scale: [0.25, 0.5, 0.85, 1.2],
                 opacity: [0.15, 0.2, 0.25, 0.3],
               }}
               transition={{
-                // Quick expansion phase (1.2s)
                 duration: 1.2,
                 ease: [0.4, 0, 0.2, 1],
                 times: [0, 0.3, 0.7, 1],
@@ -112,10 +134,7 @@ export function Hero() {
               <img
                 src="/marketing-professional.png"
                 alt="Marketing professional with smartphone"
-                className="relative z-10 w-full max-w-[224px] sm:max-w-[269px] lg:max-w-[314px] xl:max-w-[358px] h-auto object-contain"
-                style={{
-                  filter: 'drop-shadow(-20px 0 40px rgba(32, 164, 243, 0.25))',
-                }}
+                className="relative z-10 w-full max-w-56 sm:max-w-72 lg:max-w-80 xl:max-w-96 h-auto object-contain"
                 onError={(e) => {
                   // Hide image container if it fails to load
                   const target = e.target as HTMLImageElement;

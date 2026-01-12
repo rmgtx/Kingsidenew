@@ -16,11 +16,7 @@ export function ConfirmationModal({ isOpen, setIsOpen }: ConfirmationModalProps)
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 grid place-items-center z-50 px-4"
-          style={{
-            backgroundColor: 'rgba(17, 17, 17, 0.3)',
-            backdropFilter: 'blur(4px)',
-          }}
+          className="fixed inset-0 grid place-items-center z-50 px-4 bg-foreground/30 backdrop-blur-sm"
         >
           <motion.div
             initial={{ scale: 0.85, rotate: '8deg' }}

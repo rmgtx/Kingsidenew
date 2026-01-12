@@ -45,10 +45,9 @@ export function Navigation() {
         {/* Logo */}
         <a href="#" className="flex items-center group transition-transform hover:scale-105">
           <img 
-            src="/kingside-wordmark.svg?v=2" 
+            src="/kingside-wordmark.svg" 
             alt="Kingside" 
             className="h-10 w-auto"
-            style={{ display: 'block', maxWidth: 'none' }}
           />
         </a>
 
@@ -79,7 +78,7 @@ export function Navigation() {
                 <List size={24} weight="bold" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] border-l border-border bg-background">
+            <SheetContent side="right" className="w-80 border-l border-border bg-background">
               <SheetHeader>
                 <SheetTitle className="text-left font-heading text-2xl font-bold flex items-center gap-3">
                   <img 

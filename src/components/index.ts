@@ -2,6 +2,7 @@ export * from './brand/NeuBrutalistButton';
 export * from './brand/AnimatedTaskText';
 export * from './brand/NeuCard';
 export * from './brand/AnimatedNeuCard';
+export * from './brand/GridPattern';
 
 export * from './sections/Navigation';
 export * from './sections/Hero';

@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { NeuBrutalistButton } from "@/components";
 import { ConfirmationModal } from "@/components/ConfirmationModal";
 import { CheckCircle } from "@phosphor-icons/react";
+import { Card, CardContent } from "@/components/ui/card";
 
 export function ContactForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -83,8 +84,8 @@ export function ContactForm() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {/* Clean form card with subtle shadow */}
-            <div className="rounded-xl border bg-card p-8 lg:p-10 shadow-lg">
+            <Card className="shadow-lg">
+              <CardContent className="p-8 lg:p-10">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
@@ -160,7 +161,8 @@ export function ContactForm() {
                   </NeuBrutalistButton>
                 </div>
               </form>
-            </div>
+              </CardContent>
+            </Card>
           </motion.div>
         </div>
       </div>
