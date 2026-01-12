@@ -20,12 +20,12 @@ export function Footer() {
           >
             <div className="flex items-center">
               <img 
-                src="/kingside-wordmark-light.svg"
+                src={`${import.meta.env.BASE_URL}kingside-wordmark-light.svg`}
                 alt="Kingside" 
                 className="h-12 w-auto"
                 onError={(e) => {
                   // Fallback to the default wordmark if light version isn't present yet.
-                  (e.currentTarget as HTMLImageElement).src = "/kingside-wordmark.svg";
+                  (e.currentTarget as HTMLImageElement).src = `${import.meta.env.BASE_URL}kingside-wordmark.svg`;
                 }}
               />
             </div>

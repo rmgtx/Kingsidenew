@@ -45,7 +45,7 @@ export function Navigation() {
         {/* Logo */}
         <a href="#" className="flex items-center group transition-transform hover:scale-105">
           <img 
-            src="/kingside-wordmark.svg" 
+            src={`${import.meta.env.BASE_URL}kingside-wordmark.svg`}
             alt="Kingside" 
             className="h-10 w-auto"
           />
@@ -82,7 +82,7 @@ export function Navigation() {
               <SheetHeader>
                 <SheetTitle className="text-left font-heading text-2xl font-bold flex items-center gap-3">
                   <img 
-                    src="/kingside-wordmark.svg" 
+                    src={`${import.meta.env.BASE_URL}kingside-wordmark.svg`}
                     alt="Kingside" 
                     className="h-8 w-auto"
                   />

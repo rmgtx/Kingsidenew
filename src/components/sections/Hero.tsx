@@ -129,10 +129,10 @@ export function Hero() {
               }}
             />
             
-            {/* Image container - Marketing professional PNG */}
+            {/* Image container - Marketing professional WebP */}
             <div className="relative">
               <img
-                src="/marketing-professional.png"
+                src={`${import.meta.env.BASE_URL}marketing-professional.webp`}
                 alt="Marketing professional with smartphone"
                 className="relative z-10 w-full max-w-56 sm:max-w-72 lg:max-w-80 xl:max-w-96 h-auto object-contain"
                 onError={(e) => {
