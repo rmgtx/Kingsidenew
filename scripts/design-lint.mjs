@@ -27,8 +27,6 @@ const ALLOW_ARBITRARY_IN_DIRS = [
 // Inline styles are allowed only for motion transforms (and only in these files).
 // GridPattern uses CSS variables for 60fps performance optimizations.
 const ALLOW_STYLE_FILES = new Set([
-  path.join(repoRoot, "src", "components", "brand", "NeuBrutalistButton.tsx"),
-  path.join(repoRoot, "src", "components", "brand", "AnimatedNeuCard.tsx"),
   path.join(repoRoot, "src", "components", "brand", "GridPattern.tsx"),
 ]);
 
@@ -82,12 +80,41 @@ function lintFile(filePath) {
 
   // 4) Inline styles (only allow motion transform-only usage in allowlist)
   if (/\bstyle\s*=\s*\{\{/.test(text) && !ALLOW_STYLE_FILES.has(filePath)) {
-    // Allow very specific transform-only usage: style={{ transform }} or style={{ transform: ... }} etc.
-    const hasOnlyTransformStyle =
-      /\bstyle\s*=\s*\{\{\s*transform\s*(?::|,|\s*\})/.test(text) &&
-      !/\bstyle\s*=\s*\{\{[\s\S]*?(background|color|border|boxShadow|filter|opacity)\b/.test(text);
+    // Allow only transform-only (and optional CSS variable) inline styles.
+    // IMPORTANT: We must validate the style *object body* only, not the entire file.
+    const styleMatches = [...text.matchAll(/\bstyle\s*=\s*\{\{([\s\S]*?)\}\}/g)];
 
-    if (!hasOnlyTransformStyle) {
+    const disallowedPropRe = /\b(background|color|border|boxShadow|filter|opacity)\b/;
+    let hasDisallowedStyle = false;
+
+    for (const m of styleMatches) {
+      const styleBodyRaw = m[1] ?? "";
+      const styleBody = styleBodyRaw.replace(/\/\*[\s\S]*?\*\//g, "");
+
+      if (disallowedPropRe.test(styleBody)) {
+        hasDisallowedStyle = true;
+        break;
+      }
+
+      // Strip allowed entries:
+      // - transform (shorthand or key/value)
+      // - clipPath (for motion radial fill effects)
+      // - CSS variable assignments (e.g. "--x": ..., --x: ...)
+      const stripped = styleBody
+        .replace(/\btransform\b\s*(?::[^,}]+)?/g, "")
+        .replace(/\bclipPath\b\s*(?::[^,}]+)?/g, "")
+        .replace(/["']--[a-zA-Z0-9_-]+["']\s*:\s*[^,}]+/g, "")
+        .replace(/\b--[a-zA-Z0-9_-]+\b\s*:\s*[^,}]+/g, "")
+        .replace(/[,{}\s]/g, "");
+
+      // If anything identifier-like remains, it's not transform-only.
+      if (/[a-zA-Z_$]/.test(stripped)) {
+        hasDisallowedStyle = true;
+        break;
+      }
+    }
+
+    if (hasDisallowedStyle) {
       errors.push("Inline styles found. Prefer tokens/classes; allow only transform-only motion styles.");
     }
   }

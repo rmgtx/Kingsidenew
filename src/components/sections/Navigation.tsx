@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { List } from "@phosphor-icons/react";
-import { NeuBrutalistButton } from "@/components";
+import { BrandButton } from "@/components";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,11 +63,15 @@ export function Navigation() {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full" />
             </a>
           ))}
-          <div className="ml-4">
-            <NeuBrutalistButton href="#contact" variant="primary">
-              Book a Call
-            </NeuBrutalistButton>
-          </div>
+          <BrandButton
+            href="#contact"
+            variant="brand"
+            size="sm"
+            className="ml-4"
+            aria-label="Book a Call"
+          >
+            Book a Call
+          </BrandButton>
         </div>
 
         {/* Mobile Nav */}
@@ -101,12 +105,14 @@ export function Navigation() {
                   </a>
                 ))}
                 <div className="mt-8 pt-8 border-t border-border">
-                  <NeuBrutalistButton 
-                    href="#contact" 
-                    variant="primary"
+                  <BrandButton
+                    href="#contact"
+                    variant="brand"
+                    size="default"
+                    aria-label="Book a Call"
                   >
                     Book a Call
-                  </NeuBrutalistButton>
+                  </BrandButton>
                 </div>
               </div>
             </SheetContent>

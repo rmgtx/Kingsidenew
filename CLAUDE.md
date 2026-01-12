@@ -16,7 +16,7 @@ Before making any changes, read these documents first:
 | Document | Location | Purpose |
 |----------|----------|---------|
 | **FRESH_START_GUIDE.md** | Root directory | Complete rebuild guide, all content, architecture |
-| **BRAND_COMPONENTS.md** | Root directory | Exact code for NeuBrutalistButton & AnimatedTaskText |
+| **BRAND_COMPONENTS.md** | Root directory | Legacy component code (NeuBrutalistButton deprecated, use BrandButton) |
 
 ### Key Changes from Old Approach
 
@@ -29,10 +29,10 @@ Before making any changes, read these documents first:
 
 ### What to Preserve
 
-1. **Brand colors** (linen, black, blue, purple, red)
+1. **Brand colors** (white background, black text, blue accent)
 2. **Fonts** (Poppins headings, Raleway body)
-3. **NeuBrutalistButton** (spring-physics animation)
-4. **Logo components**
+3. **BrandButton** (radial fill + parallax animation)
+4. **Logo components** (wordmark SVGs)
 5. **All content/copy**
 
 ### Philosophy
@@ -62,13 +62,13 @@ Before making any changes, read these documents first:
 
 ## Project Overview
 
-The **Kingside Group Website** is a modern single-page application (SPA) showcasing an AI consulting agency. The design follows a **modern brutalist aesthetic** inspired by chess strategy, featuring:
+The **Kingside Group Website** is a modern single-page application (SPA) showcasing an AI consulting agency. The design follows a **modern SaaS aesthetic** using shadcn/ui, featuring:
 
-- Oversized typography with animated text
-- Neubrutalist floating shadow buttons and cards
-- Monochromatic base (linen/cream background with black text)
-- Strategic color accents (blue, purple, red)
-- Chess-inspired branding with King icon
+- Clean typography with Poppins headings and Raleway body
+- BrandButton with radial fill hover animation
+- Clean white background with black text
+- Blue accent color (#20A4F3)
+- Chess-inspired branding with King wordmark
 - Mobile-first responsive design
 - Accessibility-first approach (WCAG 2.1 AA minimum)
 
@@ -126,7 +126,7 @@ KINGSIDEsite/
 │   ├── components/                 # React components
 │   │   ├── ui/                    # Reusable UI primitives (shadcn-style)
 │   │   ├── figma/                 # Figma-imported components
-│   │   ├── NeuBrutalistButton.tsx # Signature floating shadow button
+│   │   ├── brand-button.tsx       # BrandButton with radial fill animation
 │   │   ├── Hero.tsx               # Hero section with animated text
 │   │   ├── Navigation.tsx         # Site navigation
 │   │   ├── Footer.tsx             # Site footer
@@ -394,42 +394,50 @@ import { Hero, Navigation, Footer } from '@/components';
 
 ## Component Patterns
 
-### 1. Neubrutalist Button (Required for CTAs)
+### 1. BrandButton (Required for CTAs)
 
-**⚠️ CRITICAL:** All primary and secondary CTAs MUST use `NeuBrutalistButton` component.
+**⚠️ CRITICAL:** All primary and secondary CTAs MUST use `BrandButton` component.
 
 ```tsx
-import { NeuBrutalistButton } from '@/components/NeuBrutalistButton';
+import { BrandButton } from '@/components/ui/brand-button';
 
-// Primary CTA (black with blue shadow)
-<NeuBrutalistButton
-  variant="primary"
-  href="#learn-more"
-  ariaLabel="Learn more about Kingside services"
+// Primary CTA (black with blue radial fill on hover)
+<BrandButton
+  href="#contact"
+  variant="brand"
+  size="lg"
+  aria-label="Try it firsthand"
 >
-  Learn More
-</NeuBrutalistButton>
+  Try it firsthand
+</BrandButton>
 
-// Secondary CTA (linen with purple shadow)
-<NeuBrutalistButton
-  variant="secondary"
-  href="#book-call"
-  ariaLabel="Schedule a consultation call"
+// Secondary CTA (outline with blue fill on hover)
+<BrandButton
+  href="#why-kingside"
+  variant="brandOutline"
+  size="lg"
+  aria-label="Schedule a demo"
 >
-  Book a Call
-</NeuBrutalistButton>
+  Schedule a demo
+</BrandButton>
+
+// As a button (not a link)
+<BrandButton type="submit" variant="brand">
+  Send message
+</BrandButton>
 ```
 
 **Features:**
-- Floating shadow animation (6-12px range with spring physics)
-- Text slide animation on hover
-- Arrow icon slide and color transition
-- Touch-friendly 56px minimum height
-- Accessible focus states
+- Radial fill animation (liquid accent-blue expands from cursor on hover)
+- Cursor-follow parallax (subtle ±2px movement)
+- Sheen sweep on hover
+- Micro-press animation on click
+- Accessible focus states (shadcn baseline)
+- Supports `href` (renders as `<a>`) or no href (renders as `<button>`)
 
 **DO NOT use:**
 - Standard anchor tags styled as buttons
-- shadcn/ui button component
+- The deprecated `NeuBrutalistButton` component
 - Custom one-off button implementations
 
 ### 2. Grid Layout (Required for Grids)
@@ -709,11 +717,11 @@ The primary user has **beginner-level technical knowledge**. Follow these guidel
 **Good response:**
 ```
 I'll add a new button to the Hero section. This button will use the
-NeuBrutalistButton component (located at src/components/NeuBrutalistButton.tsx)
-which gives it the floating shadow effect you see on other buttons.
+BrandButton component (located at src/components/ui/brand-button.tsx)
+which gives it the radial fill hover effect you see on other buttons.
 
-I'm adding it to src/components/Hero.tsx around line 45, right after the
-existing "Learn More" button. This keeps both buttons together in a row on
+I'm adding it to src/components/sections/Hero.tsx, right after the
+existing CTA button. This keeps both buttons together in a row on
 desktop and stacks them on mobile.
 
 The button will automatically inherit the design system colors and spacing,
@@ -745,8 +753,8 @@ Updated Hero component with new CTA.
 // ❌ DON'T use regular buttons for CTAs
 <button className="...">Click Me</button>
 
-// ✅ DO use NeuBrutalistButton
-<NeuBrutalistButton variant="primary">Click Me</NeuBrutalistButton>
+// ✅ DO use BrandButton
+<BrandButton variant="brand" href="#contact">Click Me</BrandButton>
 ```
 
 **3. Creating Custom Grids**
@@ -946,7 +954,7 @@ rounded-xl     // 6px (cards)
    - Color contrast?
 
 6. **Am I using the right component?**
-   - CTAs → NeuBrutalistButton
+   - CTAs → BrandButton
    - Grids → Grid component
    - Layout → Design system primitives
 

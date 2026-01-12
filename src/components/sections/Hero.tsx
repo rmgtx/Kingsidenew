@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
-import { NeuBrutalistButton, GridPattern } from "@/components";
+import { BrandButton, GridPattern } from "@/components";
 
 export function Hero() {
   const gridContainerRef = React.useRef<HTMLDivElement>(null);
@@ -75,7 +75,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-10"
             >
-              Effortlessly Create, Deliver, and Reimagine All-Hands Corporate Meetings
+              Kingside helps businesses build and implement AI strategies so they can focus on what matters most
             </motion.p>
 
             {/* CTAs */}
@@ -85,20 +85,22 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <NeuBrutalistButton
+              <BrandButton
                 href="#contact"
-                variant="primary"
-                ariaLabel="Try it firsthand"
+                variant="brand"
+                size="lg"
+                aria-label="Try it firsthand"
               >
                 Try it firsthand
-              </NeuBrutalistButton>
-              <NeuBrutalistButton
+              </BrandButton>
+              <BrandButton
                 href="#why-kingside"
-                variant="secondary"
-                ariaLabel="Schedule a demo"
+                variant="brandOutline"
+                size="lg"
+                aria-label="Schedule a demo"
               >
                 Schedule a demo
-              </NeuBrutalistButton>
+              </BrandButton>
             </motion.div>
           </div>
 

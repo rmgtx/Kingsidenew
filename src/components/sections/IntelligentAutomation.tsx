@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { NeuBrutalistButton } from "@/components";
+import { BrandButton } from "@/components";
 import { Badge } from "@/components/ui/badge";
 import { Megaphone, TrendUp, Gear, Headset } from "@phosphor-icons/react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -124,9 +124,14 @@ export function IntelligentAutomation() {
                   </p>
                   
                   <div className="pt-4">
-                    <NeuBrutalistButton variant="secondary" href="#contact">
+                    <BrandButton
+                      href="#contact"
+                      variant="brandOutline"
+                      size="default"
+                      aria-label="Get Started"
+                    >
                       Get Started
-                    </NeuBrutalistButton>
+                    </BrandButton>
                   </div>
                 </div>
 

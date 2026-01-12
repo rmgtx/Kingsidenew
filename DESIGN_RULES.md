@@ -12,7 +12,7 @@ This project is intentionally **shadcn/ui-first**. The goal is a codebase that i
 
 ### Allowed brand exceptions
 
-- **`NeuBrutalistButton`** (`src/components/brand/NeuBrutalistButton.tsx`): custom animation logic is allowed, but visual styling must remain shadcn-compatible (sizes, radii, focus, disabled).
+- **`BrandButton`** (`src/components/ui/brand-button.tsx`): Wraps shadcn `Button` and adds radial fill hover effect, cursor-follow parallax, sheen sweep, and micro-press animation. Uses `buttonVariants` for baseline sizing/focus/disabled. Inline `clipPath` styles are allowed for motion.
 - **Wordmark assets**: static assets placed in `public/` and referenced via `<img src="...">`.
 
 ### Canonical layout tokens (use these everywhere)

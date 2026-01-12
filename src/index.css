@@ -91,6 +91,56 @@ h6 {
   color: var(--color-accent-foreground);
 }
 
+/* ============================================
+   Button polish utilities (design-system safe)
+   ============================================ */
+.ks-btn-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.ks-btn-sheen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+
+  /* Soft sheen sweep */
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 100%
+  );
+  transform: translateX(-40%);
+  opacity: 0;
+  transition: transform 500ms ease-out, opacity 200ms ease-out;
+}
+
+.ks-btn-sheen:hover::before {
+  transform: translateX(40%);
+  opacity: 1;
+}
+
+.ks-btn-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+
+  /* Thin highlight ring on hover for depth */
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+  mix-blend-mode: overlay;
+}
+
+.ks-btn-sheen:hover::after {
+  opacity: 1;
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;

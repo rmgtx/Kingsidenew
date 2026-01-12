@@ -4,6 +4,8 @@ export * from './brand/NeuCard';
 export * from './brand/AnimatedNeuCard';
 export * from './brand/GridPattern';
 
+export * from './ui/brand-button';
+
 export * from './sections/Navigation';
 export * from './sections/Hero';
 export * from './sections/MrBottleneck';

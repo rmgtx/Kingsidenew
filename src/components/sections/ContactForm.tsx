@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { NeuBrutalistButton } from "@/components";
+import { BrandButton } from "@/components";
 import { ConfirmationModal } from "@/components/ConfirmationModal";
 import { CheckCircle } from "@phosphor-icons/react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -156,9 +156,9 @@ export function ContactForm() {
                 </div>
 
                 <div className="pt-4">
-                  <NeuBrutalistButton type="submit" variant="primary" ariaLabel="Send message">
+                  <BrandButton type="submit" variant="brand" aria-label="Send message">
                     {isSubmitting ? "Sending..." : "Send message"}
-                  </NeuBrutalistButton>
+                  </BrandButton>
                 </div>
               </form>
               </CardContent>
