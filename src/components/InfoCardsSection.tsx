@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "motion/react";
 import {Card} from "@/components/ui/card";
 import {ArrowRightIcon,CrownIcon,CrownCrossIcon,HorseIcon} from "@phosphor-icons/react";
 
@@ -28,8 +29,21 @@ const cards:InfoCard[]=[{
 
 export function InfoCardsSection(){
   return(
-    <section className="w-full py-16">
-      <div className="mx-auto w-full max-w-6xl px-6">
+    <section className="w-full py-24 lg:py-32">
+      <div className="mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+          className="mb-16 lg:mb-20"
+        >
+          <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-accent leading-tight">
+            Real Problems. Smarter Solutions. Designed to Help You Scale.
+          </h2>
+        </motion.div>
+
         <div className="grid gap-6 md:grid-cols-3">
           {cards.map((c,idx)=>{
             const Icon=c.Icon;
@@ -45,41 +59,44 @@ export function InfoCardsSection(){
                 <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-black/5 transition-all duration-500 group-hover:bg-white/10" />
                 <div className="pointer-events-none absolute -right-14 -bottom-14 h-48 w-48 rounded-full bg-black/5 transition-all duration-500 group-hover:bg-white/10" />
 
-                <div className="relative p-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="grid h-12 w-12 place-items-center rounded-xl bg-accent/10 transition-colors duration-500 group-hover:bg-white/15">
-                        <Icon
-                          size={48}
-                          className="h-6 w-6 text-accent transition-colors duration-500 group-hover:text-white"
-                          weight="bold"
-                        />
-                      </div>
-
-                      <div>
-                        <p className="text-xs font-medium text-black/50 transition-colors duration-500 group-hover:text-white/70">
-                          {c.subtitle}
-                        </p>
-                        <h3 className="text-lg font-semibold text-black transition-colors duration-500 group-hover:text-white">
-                          {c.title}
-                        </h3>
-                      </div>
-                    </div>
-
-                    <div className="grid h-10 w-10 place-items-center rounded-xl bg-black/5 transition-all duration-500 group-hover:bg-white/15">
-                      <ArrowRightIcon
-                        size={20}
-                        className="text-black/70 transition-all duration-500 group-hover:translate-x-1 group-hover:text-white"
+                <div className="relative p-6 flex flex-col h-full">
+                  {/* Icon and Arrow at top - aligned (non-hover) / Icon and Subtitle aligned (hover) */}
+                  <div className="flex items-center justify-between mb-4 group-hover:justify-start group-hover:gap-3 group-hover:mb-4">
+                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-accent/10 transition-colors duration-500 group-hover:bg-white/15 shrink-0">
+                      <Icon
+                        size={48}
+                        className="h-6 w-6 text-accent transition-colors duration-500 group-hover:text-white"
                         weight="bold"
                       />
                     </div>
+                    <ArrowRightIcon
+                      size={20}
+                      className="text-black/70 transition-all duration-500 group-hover:opacity-0 group-hover:hidden"
+                      weight="bold"
+                    />
+                    {/* Bold Subtitle - aligned with icon in hover */}
+                    <h3 className="hidden group-hover:block text-lg font-bold text-white">
+                      {c.subtitle}
+                    </h3>
                   </div>
 
-                  <div className="mt-4">
-                    <p className="text-sm leading-relaxed text-black/60 transition-colors duration-500 group-hover:text-white/85">
+                  {/* Bold Subtitle - below icon in non-hover */}
+                  <h3 className="text-lg font-bold text-black transition-colors duration-500 group-hover:hidden mb-4">
+                    {c.subtitle}
+                  </h3>
+
+                  {/* Divider - visible in non-hover, hidden in hover */}
+                  <div className="h-px w-full bg-black/10 transition-all duration-500 group-hover:opacity-0 group-hover:hidden mb-4" />
+
+                  {/* Body text - bottom justified in non-hover, directly under subtitle in hover */}
+                  <p className="text-sm leading-relaxed text-black/60 transition-colors duration-500 group-hover:text-white/85 mt-auto group-hover:mt-0">
+                    <span className="group-hover:hidden">
+                      {c.body.split('.')[0] + '.'}
+                    </span>
+                    <span className="hidden group-hover:inline">
                       {c.body}
-                    </p>
-                  </div>
+                    </span>
+                  </p>
                 </div>
               </Card>
             );
