@@ -2,6 +2,7 @@ import { Toaster } from 'sonner';
 import {
   Navigation,
   Hero,
+  OrbitSection,
   BentoGrid,
   IntelligentAutomation,
   ContactForm,
@@ -13,6 +14,7 @@ function App() {
     <main className="min-h-screen bg-background text-foreground">
       <Navigation />
       <Hero />
+      <OrbitSection />
       <BentoGrid />
       <IntelligentAutomation />
       <ContactForm />
