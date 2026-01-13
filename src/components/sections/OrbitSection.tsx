@@ -40,7 +40,7 @@ export function OrbitSection() {
       <div
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
         style={{
-          background: 'radial-gradient(circle at center bottom, rgba(32, 164, 243, 0.15) 0%, rgba(32, 164, 243, 0.05) 40%, transparent 70%)',
+          background: 'radial-gradient(circle at center bottom, rgba(32, 164, 243, 0.28) 0%, rgba(32, 164, 243, 0.18) 15%, rgba(32, 164, 243, 0.10) 30%, rgba(32, 164, 243, 0.05) 50%, transparent 70%)',
           filter: 'blur(40px)',
         }}
         aria-hidden="true"
