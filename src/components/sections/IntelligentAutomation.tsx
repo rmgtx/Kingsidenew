@@ -75,7 +75,7 @@ export function IntelligentAutomation() {
   return (
     <section
       id="services"
-      className="relative py-24 lg:py-32 px-6 lg:px-8 bg-background overflow-hidden"
+      className="relative py-24 lg:py-32 px-5 sm:px-6 lg:px-8 bg-background overflow-hidden"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}

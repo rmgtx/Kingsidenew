@@ -87,7 +87,7 @@ function BentoCard({
 
 export function BentoGrid() {
   return (
-    <section id="why-kingside" className="py-24 lg:py-32 px-6 lg:px-8 bg-background">
+    <section id="why-kingside" className="py-24 lg:py-32 px-5 sm:px-6 lg:px-8 bg-background">
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
         <motion.div 

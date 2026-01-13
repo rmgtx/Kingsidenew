@@ -18,14 +18,14 @@ import OneDriveIcon from '@/assets/large icons/One Drive large.png';
 export function OrbitSection() {
   return (
     <section
-      className="relative w-full flex flex-col items-center justify-end overflow-hidden bg-background text-foreground min-h-[700px] pb-[400px] border-t border-b border-border"
+      className="relative w-full flex flex-col items-center justify-end overflow-hidden bg-background text-foreground min-h-[500px] md:min-h-[600px] lg:min-h-[700px] pb-64 md:pb-80 lg:pb-96 border-t border-b border-border"
       aria-label="AI tools we work with"
     >
-      <div className="container relative z-10 px-4 md:px-6 flex flex-col items-center text-center">
+      <div className="container relative z-10 px-5 sm:px-6 lg:px-8 flex flex-col items-center text-center">
         {/* Header Content */}
         <div className="max-w-4xl space-y-4 relative z-20">
           {/* Eyebrow Text */}
-          <p className="text-sm font-medium tracking-wide uppercase text-accent">
+          <p className="text-xs sm:text-sm font-medium tracking-wide uppercase text-accent">
             Open-Ecosystem Integration
           </p>
 
@@ -36,9 +36,9 @@ export function OrbitSection() {
         </div>
       </div>
 
-      {/* Subtle gradient at orbit center */}
+      {/* Subtle gradient at orbit center - responsive width */}
       <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[300px] sm:w-[400px] lg:w-[600px] h-[200px] sm:h-[250px] lg:h-[300px] pointer-events-none"
         style={{
           background: 'radial-gradient(circle at center bottom, rgba(32, 164, 243, 0.28) 0%, rgba(32, 164, 243, 0.18) 15%, rgba(32, 164, 243, 0.10) 30%, rgba(32, 164, 243, 0.05) 50%, transparent 70%)',
           filter: 'blur(40px)',

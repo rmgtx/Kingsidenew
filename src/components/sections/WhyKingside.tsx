@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export function WhyKingside() {
   return (
-    <section className="py-24 px-6 lg:px-8">
+    <section className="py-24 px-5 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mb-16">
           <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl text-left">

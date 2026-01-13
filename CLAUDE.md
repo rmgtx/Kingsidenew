@@ -1,6 +1,6 @@
 # CLAUDE.md - AI Assistant Guide for Kingside Group Website
 
-**Last Updated:** January 12, 2026
+**Last Updated:** January 13, 2026
 **Repository:** KINGSIDEsite
 **Project Type:** Modern React SPA with shadcn/ui Design System
 **Target User Level:** Beginner-friendly
@@ -358,7 +358,7 @@ export { Footer } from './Footer';
 import { Hero, Navigation, Footer } from '@/components';
 ```
 
-### 5. Responsive Design
+### 5. Responsive Design & Mobile Standards
 
 **Mobile-First Approach:**
 ```tsx
@@ -367,6 +367,97 @@ import { Hero, Navigation, Footer } from '@/components';
 <div className="px-5 sm:px-6 lg:px-8">  // Responsive padding
 <div className="flex-col lg:flex-row">  // Stack mobile, row desktop
 <h1 className="text-4xl lg:text-6xl">  // Responsive typography
+```
+
+#### ⚠️ CRITICAL: Section Padding Standard
+
+**ALL section containers MUST use this exact padding pattern:**
+```tsx
+// Standard section padding (REQUIRED)
+<section className="py-24 lg:py-32 px-5 sm:px-6 lg:px-8">
+  <div className="mx-auto max-w-7xl">
+    {/* content */}
+  </div>
+</section>
+```
+
+| Breakpoint | Padding | Pixels |
+|------------|---------|--------|
+| Mobile (default) | `px-5` | 20px |
+| Tablet (sm: 640px+) | `sm:px-6` | 24px |
+| Desktop (lg: 1024px+) | `lg:px-8` | 32px |
+
+#### Mobile Typography Scaling
+
+**Text must scale responsively:**
+```tsx
+// Headings - scale up on larger screens
+<h1 className="text-4xl sm:text-5xl lg:text-6xl">  // Hero headline
+<h2 className="text-3xl sm:text-4xl lg:text-5xl">  // Section headline
+<h3 className="text-2xl lg:text-3xl">              // Card title
+
+// Eyebrow text
+<p className="text-xs sm:text-sm">                 // Scales on tablet+
+
+// Body text
+<p className="text-base sm:text-lg">               // Standard body
+<p className="text-lg sm:text-xl">                 // Large body
+```
+
+#### Mobile Overflow Prevention
+
+**NEVER use fixed widths that exceed mobile viewport (375px):**
+```tsx
+// ❌ DON'T - Fixed width can overflow
+<div className="w-[600px]">
+
+// ✅ DO - Responsive widths
+<div className="w-[300px] sm:w-[400px] lg:w-[600px]">
+```
+
+**Wrap decorative animations in overflow containers:**
+```tsx
+// ✅ DO - Contain animations that move off-screen
+<div className="hidden lg:block overflow-hidden">
+  <motion.div animate={{ x: [0, -200] }} />
+</div>
+```
+
+**Global overflow protection is in `index.css`:**
+```css
+html { overflow-x: hidden; }
+body { overflow-x: hidden; width: 100%; }
+```
+
+#### Mobile Height Constraints
+
+**Use responsive heights instead of fixed values:**
+```tsx
+// ❌ DON'T - Fixed height on all screens
+<div className="h-96">
+
+// ✅ DO - Responsive heights
+<div className="h-72 sm:h-80 lg:h-96">
+```
+
+**Use responsive min-heights for sections:**
+```tsx
+// ❌ DON'T - Large fixed min-height
+<section className="min-h-[700px]">
+
+// ✅ DO - Responsive min-heights
+<section className="min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
+```
+
+#### Mobile Gap/Spacing
+
+**Gaps should be responsive:**
+```tsx
+// ❌ DON'T - Same gap on all screens
+<div className="gap-12">
+
+// ✅ DO - Responsive gaps
+<div className="gap-8 md:gap-12">
 ```
 
 ### 6. Accessibility Requirements
@@ -815,6 +906,37 @@ Updated Hero component with new CTA.
 <div className="flex-col lg:flex-row">  // Stack on mobile
 ```
 
+**9. Causing Horizontal Scroll on Mobile**
+```tsx
+// ❌ DON'T use fixed widths > 375px without responsive alternatives
+<div className="w-[600px]">
+<div className="min-h-[700px] pb-[400px]">
+
+// ✅ DO use responsive widths and heights
+<div className="w-[300px] sm:w-[400px] lg:w-[600px]">
+<div className="min-h-[500px] md:min-h-[600px] lg:min-h-[700px] pb-64 md:pb-80 lg:pb-96">
+```
+
+**10. Animations Overflowing Viewport**
+```tsx
+// ❌ DON'T let animations extend beyond container bounds
+<motion.div animate={{ x: [0, -240] }} />  // Can overflow left
+
+// ✅ DO wrap in overflow-hidden or hide on mobile
+<div className="hidden lg:block overflow-hidden">
+  <motion.div animate={{ x: [0, -240] }} />
+</div>
+```
+
+**11. Wrong Section Padding**
+```tsx
+// ❌ DON'T skip mobile padding step
+<section className="px-6 lg:px-8">  // Missing px-5 and sm:px-6
+
+// ✅ DO use the full responsive pattern
+<section className="px-5 sm:px-6 lg:px-8">
+```
+
 ### Common Pitfalls
 
 1. **Not exporting components from index.ts** - Components won't be importable
@@ -824,6 +946,9 @@ Updated Hero component with new CTA.
 5. **Hardcoding colors/fonts** - Always use design tokens
 6. **Creating component-specific spacing** - Use design system spacing scale
 7. **Forgetting dark mode** - Design system supports dark mode via CSS variables
+8. **Not testing on mobile** - Always test on 375px viewport before deploying
+9. **Using fixed dimensions** - Replace `w-[600px]` with responsive `w-[300px] sm:w-[400px] lg:w-[600px]`
+10. **Skipping sm: breakpoint in padding** - Always use full `px-5 sm:px-6 lg:px-8` pattern
 
 ---
 

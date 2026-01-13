@@ -68,6 +68,8 @@ body {
   color: var(--color-foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 h1,
@@ -141,9 +143,10 @@ h6 {
   opacity: 1;
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling & prevent horizontal overflow on mobile */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Custom Utilities */

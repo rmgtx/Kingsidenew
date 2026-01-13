@@ -8,7 +8,7 @@ export function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
       {/* Main Footer Content */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16 lg:py-20">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 py-16 lg:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
           
           {/* Brand Column */}
@@ -127,7 +127,7 @@ export function Footer() {
 
       {/* Bottom Bar */}
       <Separator className="bg-primary-foreground/10" />
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-6">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/50">
           <p>© {currentYear} Kingside Group. All rights reserved.</p>
           <div className="flex gap-6">

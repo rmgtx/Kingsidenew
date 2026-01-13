@@ -28,7 +28,7 @@ export function Hero() {
   };
 
   return (
-    <section 
+    <section
       className="relative overflow-hidden bg-background group"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
@@ -50,10 +50,10 @@ export function Hero() {
       />
 
       {/* Main content */}
-      <div className="relative z-10 mx-auto max-w-7xl w-full px-6 lg:px-8 pt-32 lg:pt-40 pb-12 lg:pb-16 pointer-events-none">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+      <div className="relative z-10 mx-auto max-w-7xl w-full px-5 sm:px-6 lg:px-8 pt-32 lg:pt-40 pb-0 pointer-events-none">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-end">
           {/* Left column - Text content */}
-          <div className="max-w-xl pointer-events-auto">
+          <div className="max-w-xl pointer-events-auto pb-12 lg:pb-16">
             {/* Eyebrow text */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -110,49 +110,52 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right column - Marketing professional image */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="relative flex justify-center lg:justify-end pointer-events-auto self-end"
-          >
-            {/* ============================================
-                ANIMATED BLUE GLOW EFFECT - Hero Background
-                Starts behind marketing image, expands right-to-left
-                ============================================ */}
-            <motion.div
-              className="absolute pointer-events-none right-0 top-1/2 -translate-y-1/2 h-40 w-40 rounded-full bg-accent/30 blur-3xl"
-              initial={{ x: 64, y: 0, scale: 0.25, opacity: 0.15 }}
-              animate={{
-                x: [64, -80, -160, -240],
-                y: [0, -5, -10, -15],
-                scale: [0.25, 0.5, 0.85, 1.2],
-                opacity: [0.15, 0.2, 0.25, 0.3],
-              }}
-              transition={{
-                duration: 1.2,
-                ease: [0.4, 0, 0.2, 1],
-                times: [0, 0.3, 0.7, 1],
-              }}
-            />
-            
-            {/* Image container - Marketing professional WebP */}
-            <div className="relative">
-              <img
-                src={`${import.meta.env.BASE_URL}marketing-professional.webp`}
-                alt="Marketing professional with smartphone"
-                className="relative z-10 w-full max-w-56 sm:max-w-72 lg:max-w-80 xl:max-w-96 h-auto object-contain"
-                onError={(e) => {
-                  // Hide image container if it fails to load
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                }}
-              />
-            </div>
-          </motion.div>
-        </div>
+          </div>
       </div>
+
+      {/* Marketing professional image - absolute positioned below nav to section bottom */}
+      <motion.div
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7, delay: 0.3 }}
+        className="absolute top-20 bottom-0 right-5 sm:right-6 lg:right-8 xl:right-[calc((100vw-80rem)/2+2rem)] flex flex-col justify-end items-center lg:items-end pointer-events-auto z-10"
+      >
+        {/* ============================================
+            ANIMATED BLUE GLOW EFFECT - Hero Background
+            Hidden on mobile to prevent overflow, visible on lg+
+            ============================================ */}
+        <div className="hidden lg:block absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute right-0 top-1/2 -translate-y-1/2 h-40 w-40 rounded-full bg-accent/30 blur-3xl"
+            initial={{ x: 64, y: 0, scale: 0.25, opacity: 0.15 }}
+            animate={{
+              x: [64, -80, -160, -240],
+              y: [0, -5, -10, -15],
+              scale: [0.25, 0.5, 0.85, 1.2],
+              opacity: [0.15, 0.2, 0.25, 0.3],
+            }}
+            transition={{
+              duration: 1.2,
+              ease: [0.4, 0, 0.2, 1],
+              times: [0, 0.3, 0.7, 1],
+            }}
+          />
+        </div>
+        
+        {/* Image container - Marketing professional WebP */}
+        <div className="relative h-full">
+          <img
+            src={`${import.meta.env.BASE_URL}marketing-professional.webp`}
+            alt="Marketing professional with smartphone"
+            className="relative z-10 h-full w-auto object-contain object-bottom"
+            onError={(e) => {
+              // Hide image container if it fails to load
+              const target = e.target as HTMLImageElement;
+              target.style.display = 'none';
+            }}
+          />
+        </div>
+      </motion.div>
     </section>
   );
 }

@@ -41,7 +41,7 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-24 lg:py-32 px-6 lg:px-8 bg-background">
+    <section id="contact" className="py-24 lg:py-32 px-5 sm:px-6 lg:px-8 bg-background">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           
