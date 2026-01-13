@@ -113,12 +113,12 @@ export function Hero() {
           </div>
       </div>
 
-      {/* Marketing professional image - absolute positioned below nav to section bottom */}
+      {/* Marketing professional image - hidden on mobile, visible on lg+ */}
       <motion.div
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.7, delay: 0.3 }}
-        className="absolute top-20 bottom-0 right-5 sm:right-6 lg:right-8 xl:right-[calc((100vw-80rem)/2+2rem)] flex flex-col justify-end items-center lg:items-end pointer-events-auto z-10"
+        className="hidden lg:flex absolute top-20 bottom-0 right-5 sm:right-6 lg:right-8 xl:right-[calc((100vw-80rem)/2+2rem)] flex-col justify-end items-end pointer-events-auto z-10"
       >
         {/* ============================================
             ANIMATED BLUE GLOW EFFECT - Hero Background
