@@ -1,8 +1,5 @@
 import { motion, useInView } from "motion/react";
 import { useRef, useEffect, useState } from "react";
-import { Crown, Shield, Star } from "@phosphor-icons/react";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 
 // Animated counter component
 function AnimatedCounter({ 
@@ -45,17 +42,17 @@ function AnimatedCounter({
   );
 }
 
-// Clean modern card wrapper with subtle shadows
+// Simplified card wrapper with solid backgrounds
 function BentoCard({ 
   children, 
   className = "",
-  accentColor: _accentColor = "accent",
+  bgColor = "white",
   delay = 0,
   span = "1"
 }: { 
   children: React.ReactNode; 
   className?: string;
-  accentColor?: "accent" | "secondary" | "destructive" | "chart-4";
+  bgColor?: "primary" | "accent" | "white";
   delay?: number;
   span?: "1" | "2" | "full";
 }) {
@@ -63,6 +60,12 @@ function BentoCard({
     "1": "",
     "2": "md:col-span-2",
     "full": "md:col-span-3"
+  };
+
+  const bgClasses = {
+    "primary": "bg-primary",
+    "accent": "bg-accent",
+    "white": "bg-background"
   };
 
   return (
@@ -73,11 +76,11 @@ function BentoCard({
       transition={{ duration: 0.5, delay }}
       className={`relative ${spanClasses[span]}`}
     >
-      <Card className={`h-full shadow-lg hover:shadow-xl transition-shadow duration-300 ${className}`}>
-        <CardContent className="p-8 lg:p-10">
+      <div className={`h-full ${bgClasses[bgColor]} rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 hover:scale-[1.02] transition-transform duration-300 ${className}`}>
+        <div className="p-8 lg:p-10">
           {children}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </motion.div>
   );
 }
@@ -100,108 +103,87 @@ export function BentoGrid() {
         </motion.div>
 
         {/* Bento Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
-          {/* Card 1: Reclaim Time */}
-          <BentoCard accentColor="secondary" delay={0}>
-            <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-secondary/20 to-secondary/5">
-              <Shield size={28} weight="fill" className="text-secondary" />
-            </div>
-            <Badge variant="outline" className="mb-4 border-secondary/30 text-secondary">
-              Time Savings
-            </Badge>
-            <h3 className="mb-4 font-heading text-2xl font-bold">Reclaim your time</h3>
-            <p className="text-muted-foreground leading-relaxed">
+          {/* Row 1: Card 1 - Reclaim Time (1 col, bg-accent) */}
+          <BentoCard bgColor="accent" delay={0}>
+            <h3 className="mb-4 font-heading text-2xl lg:text-3xl font-bold text-white">Reclaim your time</h3>
+            <p className="text-base lg:text-lg leading-relaxed text-white">
               Every founder knows the grind — endless admin work and scattered tools that drain your focus. Kingside cuts through the chaos with intelligent systems that give you back your most valuable resource: time to grow, create, and lead.
             </p>
           </BentoCard>
 
-          {/* Card 2: Big Stat - 91% (spans 2 columns) */}
-          <BentoCard accentColor="accent" delay={0.1} span="2">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between h-full">
-              <div>
-                <Badge variant="outline" className="mb-4 border-accent/30 text-accent">
-                  Revenue Impact
-                </Badge>
+          {/* Row 1: Card 2 - 91% Stat (2 col, bg-primary) */}
+          <BentoCard bgColor="primary" delay={0.1} span="2">
+            <div className="flex flex-col h-full">
+              <div className="flex-1 flex flex-col justify-center">
                 <div className="flex items-baseline gap-2 mb-4">
-                  <span className="font-heading text-7xl lg:text-8xl font-bold text-accent">
+                  <span className="font-heading text-6xl lg:text-7xl font-bold text-white">
                     <AnimatedCounter value={91} suffix="%" />
                   </span>
                 </div>
-                <p className="text-xl lg:text-2xl font-medium max-w-md">
+                <p className="text-lg lg:text-xl font-medium text-white mb-6">
                   of SMBs using AI say it boosts revenue
                 </p>
               </div>
-              <p className="text-sm text-muted-foreground mt-4 lg:mt-0 lg:text-right max-w-xs">
+              <p className="text-xs opacity-70 text-white" aria-label="Source: Salesforce SMB Trends Report 2025">
                 Salesforce SMB Trends Report 2025
               </p>
             </div>
           </BentoCard>
 
-          {/* Card 3: Double Stats (spans 2 columns) */}
-          <BentoCard accentColor="accent" delay={0.2} span="2">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 h-full">
-              <div>
-                <Badge variant="outline" className="mb-4 border-accent/30 text-accent">
-                  Productivity
-                </Badge>
-                <div className="flex items-baseline gap-2 mb-2">
-                  <span className="font-heading text-6xl lg:text-7xl font-bold text-accent">
+          {/* Row 2: Card 3 - 87% Productivity Stat (1 col, bg-white) */}
+          <BentoCard bgColor="white" delay={0.2}>
+            <div className="flex flex-col h-full">
+              <div className="flex-1 flex flex-col justify-center">
+                <div className="flex items-baseline gap-2 mb-4">
+                  <span className="font-heading text-6xl lg:text-7xl font-bold text-foreground">
                     <AnimatedCounter value={87} suffix="%" />
                   </span>
                 </div>
-                <p className="text-lg font-medium">report higher productivity with AI</p>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Service Direct Small Business AI Report 2025
+                <p className="text-lg lg:text-xl font-medium text-foreground mb-6">
+                  report higher productivity with AI
                 </p>
               </div>
-              <div>
-                <Badge variant="outline" className="mb-4 border-chart-4/30 text-chart-4">
-                  Time Saved
-                </Badge>
-                <div className="flex items-baseline gap-2 mb-2">
-                  <span className="font-heading text-6xl lg:text-7xl font-bold text-chart-4">
-                    <AnimatedCounter value={13} suffix="h" />
-                  </span>
-                </div>
-                <p className="text-lg font-medium">saved per week by AI-powered teams</p>
-                <p className="text-sm text-muted-foreground mt-2">
-                  ActiveCampaign AI Study 2025
-                </p>
-              </div>
+              <p className="text-xs opacity-70 text-muted-foreground" aria-label="Source: Service Direct Small Business AI Report 2025">
+                Service Direct Small Business AI Report 2025
+              </p>
             </div>
           </BentoCard>
 
-          {/* Card 4: Compete Like Giant */}
-          <BentoCard accentColor="destructive" delay={0.3}>
-            <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-destructive/20 to-destructive/5">
-              <Star size={28} weight="fill" className="text-destructive" />
+          {/* Row 2: Card 4 - 13h Saved Stat (1 col, bg-accent) */}
+          <BentoCard bgColor="accent" delay={0.25}>
+            <div className="flex flex-col h-full">
+              <div className="flex-1 flex flex-col justify-center">
+                <div className="flex items-baseline gap-2 mb-4">
+                  <span className="font-heading text-6xl lg:text-7xl font-bold text-white">
+                    <AnimatedCounter value={13} suffix="h" />
+                  </span>
+                </div>
+                <p className="text-lg lg:text-xl font-medium text-white mb-6">
+                  saved per week by AI-powered teams
+                </p>
+              </div>
+              <p className="text-xs opacity-70 text-white" aria-label="Source: ActiveCampaign AI Study 2025">
+                ActiveCampaign AI Study 2025
+              </p>
             </div>
-            <Badge variant="outline" className="mb-4 border-destructive/30 text-destructive">
-              Competitive Edge
-            </Badge>
-            <h3 className="mb-4 font-heading text-2xl font-bold">Compete like a giant</h3>
-            <p className="text-muted-foreground leading-relaxed">
+          </BentoCard>
+
+          {/* Row 2: Card 5 - Compete Like Giant (1 col, bg-white) */}
+          <BentoCard bgColor="white" delay={0.3}>
+            <h3 className="mb-4 font-heading text-2xl lg:text-3xl font-bold text-foreground">Compete like a giant</h3>
+            <p className="text-base lg:text-lg leading-relaxed text-foreground">
               AI isn't just for the tech giants anymore. Kingside gives small and midsize teams access to the same strategic automation and intelligence tools — empowering every business to operate smarter, scale faster, and compete with clarity.
             </p>
           </BentoCard>
 
-          {/* Card 5: Execute with Precision (full width) */}
-          <BentoCard accentColor="accent" delay={0.4} span="full">
-            <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12">
-              <div className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 shrink-0">
-                <Crown size={28} weight="fill" className="text-accent" />
-              </div>
-              <div className="flex-1">
-                <Badge variant="outline" className="mb-4 border-accent/30 text-accent">
-                  Execution
-                </Badge>
-                <h3 className="mb-4 font-heading text-2xl lg:text-3xl font-bold">Execute with precision</h3>
-                <p className="text-muted-foreground leading-relaxed max-w-3xl">
-                  We don't just talk transformation — we deliver it. Kingside turns your strategic plans into daily progress with AI-driven automations that keep your business moving forward, one smart step at a time.
-                </p>
-              </div>
-            </div>
+          {/* Row 3: Card 6 - Execute with Precision (full width, bg-primary) */}
+          <BentoCard bgColor="primary" delay={0.4} span="full">
+            <h3 className="mb-4 font-heading text-2xl lg:text-3xl font-bold text-white">Execute with precision</h3>
+            <p className="text-base lg:text-lg leading-relaxed text-white max-w-3xl">
+              We don't just talk transformation — we deliver it. Kingside turns your strategic plans into daily progress with AI-driven automations that keep your business moving forward, one smart step at a time.
+            </p>
           </BentoCard>
 
         </div>
