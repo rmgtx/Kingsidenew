@@ -19,7 +19,7 @@ This project is intentionally **shadcn/ui-first**. The goal is a codebase that i
 
 - **Page container**: `mx-auto max-w-7xl px-6 lg:px-8`
 - **Standard section spacing**: `py-24 lg:py-32`
-- **Hero spacing**: `pt-32 lg:pt-40 pb-24 lg:pb-32`
+- **Hero spacing**: `pt-32 lg:pt-40 pb-12 lg:pb-16`
 - **Card “default”**: `rounded-xl border bg-card shadow-lg`
 - **Card content padding**: `p-8 lg:p-10`
 - **Button (primary/secondary CTA)**: height `h-10`, padding `px-6`, radius `rounded-md`

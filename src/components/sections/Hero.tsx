@@ -43,8 +43,14 @@ export function Hero() {
         />
       </div>
 
+      {/* Gradient fade - transitions grid to background */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-12 lg:h-16 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none"
+        aria-hidden="true"
+      />
+
       {/* Main content */}
-      <div className="relative z-10 mx-auto max-w-7xl w-full px-6 lg:px-8 pt-32 lg:pt-40 pb-24 lg:pb-32 pointer-events-none">
+      <div className="relative z-10 mx-auto max-w-7xl w-full px-6 lg:px-8 pt-32 lg:pt-40 pb-12 lg:pb-16 pointer-events-none">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left column - Text content */}
           <div className="max-w-xl pointer-events-auto">
@@ -109,7 +115,7 @@ export function Hero() {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="relative flex justify-center lg:justify-end pointer-events-auto"
+            className="relative flex justify-center lg:justify-end pointer-events-auto self-end"
           >
             {/* ============================================
                 ANIMATED BLUE GLOW EFFECT - Hero Background
