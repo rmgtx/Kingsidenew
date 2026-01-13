@@ -9,11 +9,14 @@ import {
   Footer
 } from '@/components';
 
+import {InfoCardsSection} from "@/components/InfoCardsSection";
+
 function App() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Navigation />
       <Hero />
+      <InfoCardsSection />
       <OrbitSection />
       <BentoGrid />
       <IntelligentAutomation />

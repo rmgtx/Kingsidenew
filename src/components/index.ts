@@ -8,6 +8,7 @@ export * from './ui/brand-button';
 
 export * from './sections/Navigation';
 export * from './sections/Hero';
+export {InfoCardsSection} from "./InfoCardsSection";
 export * from './sections/OrbitSection';
 export * from './sections/MrBottleneck';
 export * from './sections/WhyKingside';
