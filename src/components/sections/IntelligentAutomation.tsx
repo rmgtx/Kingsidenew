@@ -1,7 +1,7 @@
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BrandButton } from "@/components";
+import { BrandButton, GridPattern } from "@/components";
 import { Badge } from "@/components/ui/badge";
 import { Megaphone, TrendUp, Gear, Headset } from "@phosphor-icons/react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -48,10 +48,61 @@ const features = [
 export function IntelligentAutomation() {
   const [activeTab, setActiveTab] = useState("marketing");
   const activeFeature = features.find(f => f.id === activeTab) || features[0];
+  const gridContainerRef = React.useRef<HTMLDivElement>(null);
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (!gridContainerRef.current) return;
+
+    const rect = gridContainerRef.current.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    // Calculate the snapped grid coordinates (30px grid size)
+    const gridSize = 30;
+    const col = Math.floor(mouseX / gridSize);
+    const row = Math.floor(mouseY / gridSize);
+
+    const squareX = col * gridSize;
+    const squareY = row * gridSize;
+
+    gridContainerRef.current.style.setProperty('--mouse-x', `${mouseX}px`);
+    gridContainerRef.current.style.setProperty('--mouse-y', `${mouseY}px`);
+    gridContainerRef.current.style.setProperty('--grid-x', `${squareX}px`);
+    gridContainerRef.current.style.setProperty('--grid-y', `${squareY}px`);
+  };
 
   return (
-    <section id="services" className="py-24 lg:py-32 px-6 lg:px-8 bg-background">
-      <div className="mx-auto max-w-7xl">
+    <section
+      id="services"
+      className="relative py-24 lg:py-32 px-6 lg:px-8 bg-background overflow-hidden"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      {/* Grid Pattern Background - Flipped horizontally (fades from top-left) */}
+      <div ref={gridContainerRef} className={`absolute inset-0 z-0 ${isHovering ? 'grid-hovering' : ''}`}>
+        <GridPattern
+          width={30}
+          height={30}
+          flip={true}
+          className="opacity-100"
+        />
+      </div>
+
+      {/* Gradient fade at top - transitions from previous section */}
+      <div
+        className="absolute top-0 left-0 right-0 h-12 lg:h-16 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none"
+        aria-hidden="true"
+      />
+
+      {/* Gradient fade at bottom */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-12 lg:h-16 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 mx-auto max-w-7xl">
         {/* Section Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

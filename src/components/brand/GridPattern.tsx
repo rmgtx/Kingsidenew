@@ -1,12 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useRef, useId } from 'react';
 
 /**
  * GridPattern Component
  * A high-performance, interactive grid background.
- * - Uses a single SVG element
+ * - Uses a single SVG element with unique pattern IDs for multiple instances
  * - Updates via CSS variables for 60fps animations
  * - Zero React re-renders on mouse move
- * - Mouse handling is done at the parent level (Hero.tsx)
+ * - Mouse handling is done at the parent level
+ * - Supports horizontal flip via `flip` prop
  */
 interface GridPatternProps extends React.SVGProps<SVGSVGElement> {
   width?: number;
@@ -18,6 +19,8 @@ interface GridPatternProps extends React.SVGProps<SVGSVGElement> {
   className?: string;
   maxOpacity?: number;
   duration?: number;
+  /** Flip the gradient mask horizontally (default: false = fades from top-right) */
+  flip?: boolean;
 }
 
 export function GridPattern({
@@ -30,12 +33,19 @@ export function GridPattern({
   className,
   maxOpacity = 0.5,
   duration = 4,
+  flip = false,
   ...props
 }: GridPatternProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  // Generate unique ID for pattern to avoid conflicts with multiple instances
+  const uniqueId = useId();
+  const patternId = `grid-pattern-${uniqueId}`;
+
+  // Determine gradient origin based on flip prop
+  const gradientOrigin = flip ? 'top left' : 'top right';
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className={`absolute inset-0 h-full w-full overflow-hidden bg-background ${className}`}
     >
@@ -43,14 +53,14 @@ export function GridPattern({
         {...props}
         className="absolute inset-0 h-full w-full stroke-muted-foreground/50"
         style={{
-          maskImage: 'radial-gradient(100% 100% at top right, white, transparent)',
-          WebkitMaskImage: 'radial-gradient(100% 100% at top right, white, transparent)',
+          maskImage: `radial-gradient(100% 100% at ${gradientOrigin}, white, transparent)`,
+          WebkitMaskImage: `radial-gradient(100% 100% at ${gradientOrigin}, white, transparent)`,
         }}
         aria-hidden="true"
       >
         <defs>
           <pattern
-            id="grid-pattern"
+            id={patternId}
             width={width}
             height={height}
             x={x}
@@ -80,7 +90,7 @@ export function GridPattern({
         />
 
         {/* Base Grid Layer (Static) */}
-        <rect width="100%" height="100%" strokeWidth={0} fill="url(#grid-pattern)" />
+        <rect width="100%" height="100%" strokeWidth={0} fill={`url(#${patternId})`} />
 
         {/* Hover Highlight Layer (Dynamic - Radial Spotlight) */}
         <svg x={x} y={y} className="overflow-visible">
@@ -88,7 +98,7 @@ export function GridPattern({
             strokeWidth={0}
             width="100%"
             height="100%"
-            fill="url(#grid-pattern)"
+            fill={`url(#${patternId})`}
             className="stroke-foreground opacity-0 transition-opacity duration-200"
             style={{
               maskImage: `radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), black, transparent)`,
