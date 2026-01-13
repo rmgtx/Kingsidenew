@@ -36,6 +36,16 @@ export function OrbitSection() {
         </div>
       </div>
 
+      {/* Subtle gradient at orbit center */}
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at center bottom, rgba(32, 164, 243, 0.15) 0%, rgba(32, 164, 243, 0.05) 40%, transparent 70%)',
+          filter: 'blur(40px)',
+        }}
+        aria-hidden="true"
+      />
+
       {/* Orbit Animation Section */}
       <div
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0 flex items-center justify-center pointer-events-none"
