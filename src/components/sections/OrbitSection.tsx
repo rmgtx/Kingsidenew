@@ -30,8 +30,7 @@ export function OrbitSection() {
           </p>
 
           <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
-            Unbiased model selection.<br className="hidden md:block" />
-            <span className="text-accent">Unrestricted capabilities.</span>
+            Turn isolated apps into an intelligent engine.
           </h2>
         </div>
       </div>
