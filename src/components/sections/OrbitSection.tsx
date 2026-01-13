@@ -1,16 +1,19 @@
 import React from 'react';
 
-// Import PNG icons
-import ClaudeIcon from '@/assets/Claude.png';
-import CursorIcon from '@/assets/Cursor.png';
-import FigmaIcon from '@/assets/Figma.png';
-import GeminiIcon from '@/assets/Gemini Icon.png';
-import GoogleDriveIcon from '@/assets/Google Drive.png';
-import GPTIcon from '@/assets/GPT.png';
-import GrokIcon from '@/assets/Grok.png';
-import MidjourneyIcon from '@/assets/Midjourney.png';
-import N8nIcon from '@/assets/n8n.png';
-import OneDriveIcon from '@/assets/One Drive.png';
+// Import PNG icons (large versions for retina)
+import ClaudeIcon from '@/assets/large icons/Claudelarge.png';
+import CopilotIcon from '@/assets/large icons/Copilotlarge.png';
+import CursorIcon from '@/assets/large icons/Cursorlarge.png';
+import FigmaIcon from '@/assets/large icons/Figmalarge.png';
+import GeminiIcon from '@/assets/large icons/Geminilarge.png';
+import GitHubIcon from '@/assets/large icons/GitHublarge.png';
+import GoogleDriveIcon from '@/assets/large icons/Google Drive large.png';
+import GPTIcon from '@/assets/large icons/GPTlarge.png';
+import GrokIcon from '@/assets/large icons/Groklarge.png';
+import MidjourneyIcon from '@/assets/large icons/Midjourneylarge.png';
+import N8nIcon from '@/assets/large icons/n8nlarge.png';
+import OllamaIcon from '@/assets/large icons/Ollamalarge.png';
+import OneDriveIcon from '@/assets/large icons/One Drive large.png';
 
 export function OrbitSection() {
   return (
@@ -39,25 +42,28 @@ export function OrbitSection() {
         aria-hidden="true"
       >
         {/* Orbit 1 (Inner) - LLMs */}
-        <OrbitingCircles radius={140} duration={18} reverse>
+        <OrbitingCircles radius={140} duration={9} reverse>
           <TechIcon src={ClaudeIcon} alt="Claude" />
           <TechIcon src={GPTIcon} alt="ChatGPT" />
           <TechIcon src={GeminiIcon} alt="Google Gemini" />
+          <TechIcon src={OllamaIcon} alt="Ollama" />
         </OrbitingCircles>
 
-        {/* Orbit 2 (Middle) - Dev Tools */}
-        <OrbitingCircles radius={250} duration={28}>
+        {/* Orbit 2 (Middle) - Dev/AI Tools */}
+        <OrbitingCircles radius={250} duration={14}>
           <TechIcon src={CursorIcon} alt="Cursor" />
           <TechIcon src={FigmaIcon} alt="Figma" />
           <TechIcon src={MidjourneyIcon} alt="Midjourney" />
           <TechIcon src={GrokIcon} alt="Grok" />
+          <TechIcon src={CopilotIcon} alt="GitHub Copilot" />
         </OrbitingCircles>
 
         {/* Orbit 3 (Outer) - Integrations */}
-        <OrbitingCircles radius={360} duration={38} reverse>
+        <OrbitingCircles radius={360} duration={19} reverse>
           <TechIcon src={N8nIcon} alt="n8n" />
           <TechIcon src={GoogleDriveIcon} alt="Google Drive" />
           <TechIcon src={OneDriveIcon} alt="OneDrive" />
+          <TechIcon src={GitHubIcon} alt="GitHub" />
         </OrbitingCircles>
       </div>
 
