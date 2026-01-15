@@ -1,104 +1,116 @@
 import React from "react";
-import { motion } from "motion/react";
 import {Card} from "@/components/ui/card";
-import {ArrowRightIcon,CrownIcon,CrownCrossIcon,HorseIcon} from "@phosphor-icons/react";
+import {Separator} from "@/components/ui/separator";
+import {
+  Lightning,
+  Target,
+  ShieldCheck,
+  CrownCross,
+  Crown,
+  Horse,
+} from "@phosphor-icons/react";
 
-type InfoCard={
-  title:string;
-  subtitle:string;
-  body:string;
-  Icon:React.ComponentType<{size?:number;className?:string;weight?:"thin"|"light"|"regular"|"bold"|"fill"|"duotone"}>;
-};
+const services = [
+  {
+    key:"automation",
+    title:"AI Solutions",
+    Icon:Lightning,
+    bgIcon:CrownCross,
+    summary:
+      "We eliminate busywork by building AI agents that route messages, respond instantly, and keep systems in sync. The result is cleaner handoffs, faster cycles, and consistent execution without chaos."
+  },
+  {
+    key:"acquisition",
+    title:"E2E Consulting",
+    Icon:Target,
+    bgIcon:Crown,
+    summary:
+      "We design and deliver end-to-end AI integrations that work in the real world. From strategy to deployment, we ensure systems scale reliably, teams understand how to use them, and adoption carries forward long after launch. The result is AI that actually gets used—driving consistent outcomes, confident teams, and long-term value."
+  },
+  {
+    key:"reliability",
+    title:"Risk & Reliability",
+    Icon:ShieldCheck,
+    bgIcon:Horse,
+    summary:
+      "We add monitoring, safeguards, and fallback paths so your systems stay reliable under pressure. Problems stay small, incidents drop, and confidence scales with growth."
+  }
+];
 
-const cards:InfoCard[]=[{
-  title:"Lorem Ipsum",
-  subtitle:"Human Machine Verification 3.0",
-  body:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  Icon:CrownCrossIcon
-},{
-  title:"Dolor Sit",
-  subtitle:"Universal Solution",
-  body:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-  Icon:CrownIcon
-},{
-  title:"Amet Consectetur",
-  subtitle:"Adaptive Defense",
-  body:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse.",
-  Icon:HorseIcon
-}];
+function Pill({children}:{children:React.ReactNode}){
+  return(
+    <span className="inline-flex items-center rounded-full border bg-background px-3 py-1 text-xs font-medium text-foreground/80">
+      {children}
+    </span>
+  );
+}
+
+function Label({children}:{children:React.ReactNode}){
+  return(
+    <p className="text-[11px] font-semibold tracking-widest text-muted-foreground uppercase">
+      {children}
+    </p>
+  );
+}
 
 export function InfoCardsSection(){
   return(
-    <section className="w-full py-24 lg:py-32">
-      <div className="mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          className="mb-16 lg:mb-20"
-        >
-          <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-accent leading-tight">
-            Real Problems. Smarter Solutions. Designed to Help You Scale.
-          </h2>
-        </motion.div>
+    <section className="w-full py-20">
+      <div className="mx-auto w-full max-w-6xl px-6">
+        {/* Header */}
+        <div className="mb-10">
+        <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+  <span className="text-sky-500">Why Companies Choose Kingside.</span>{" "}
+</h2>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {cards.map((c,idx)=>{
-            const Icon=c.Icon;
+          <p className="mt-3 max-w-2xl text-base text-muted-foreground">
+            Clear outcomes, fast implementation, and systems that hold up under real-world use.
+          </p>
+        </div>
+
+        {/* Cards */}
+        <div className="grid gap-6 lg:grid-cols-3">
+          {services.map((s)=>{
+            const BgIcon=s.bgIcon;
+
             return(
               <Card
-                key={idx}
-                className="group relative overflow-hidden rounded-2xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                key={s.key}
+                className="group relative overflow-hidden rounded-2xl bg-card shadow-md"
               >
-                {/* Hover blue overlay */}
-                <div className="pointer-events-none absolute inset-0 translate-y-full bg-gradient-to-br from-accent to-accent transition-transform duration-500 ease-out group-hover:translate-y-0" />
+                {/* Gentle background */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-foreground/[0.04] to-transparent" />
 
-                {/* Soft background shapes */}
-                <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-black/5 transition-all duration-500 group-hover:bg-white/10" />
-                <div className="pointer-events-none absolute -right-14 -bottom-14 h-48 w-48 rounded-full bg-black/5 transition-all duration-500 group-hover:bg-white/10" />
-
-                <div className="relative p-6 flex flex-col h-full">
-                  {/* Icon and Arrow at top - aligned (non-hover) / Icon and Subtitle aligned (hover) */}
-                  <div className="flex items-center justify-between mb-4 group-hover:justify-start group-hover:gap-3 group-hover:mb-4">
-                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-accent/10 transition-colors duration-500 group-hover:bg-white/15 shrink-0">
-                      <Icon
-                        size={48}
-                        className="h-6 w-6 text-accent transition-colors duration-500 group-hover:text-white"
-                        weight="bold"
-                      />
-                    </div>
-                    <ArrowRightIcon
-                      size={20}
-                      className="text-black/70 transition-all duration-500 group-hover:opacity-0 group-hover:hidden"
-                      weight="bold"
-                    />
-                    {/* Bold Subtitle - aligned with icon in hover */}
-                    <h3 className="hidden group-hover:block text-lg font-bold text-white">
-                      {c.subtitle}
-                    </h3>
-                  </div>
-
-                  {/* Bold Subtitle - below icon in non-hover */}
-                  <h3 className="text-lg font-bold text-black transition-colors duration-500 group-hover:hidden mb-4">
-                    {c.subtitle}
-                  </h3>
-
-                  {/* Divider - visible in non-hover, hidden in hover */}
-                  <div className="h-px w-full bg-black/10 transition-all duration-500 group-hover:opacity-0 group-hover:hidden mb-4" />
-
-                  {/* Body text - bottom justified in non-hover, directly under subtitle in hover */}
-                  <p className="text-sm leading-relaxed text-black/60 transition-colors duration-500 group-hover:text-white/85 mt-auto group-hover:mt-0">
-                    <span className="group-hover:hidden">
-                      {c.body.split('.')[0] + '.'}
-                    </span>
-                    <span className="hidden group-hover:inline">
-                      {c.body}
-                    </span>
-                  </p>
+                {/* Soft background icon */}
+                <div className="pointer-events-none absolute -right-12 -top-12 opacity-[0.03] blur-[0.5px]">
+                  <BgIcon size={340} className="text-foreground" weight="thin" />
                 </div>
-              </Card>
+
+                <div className="relative p-6">
+  {/* Top */}
+  <div className="flex items-start gap-4">
+    <div className="grid h-11 w-11 place-items-center rounded-xl border bg-muted">
+      <s.Icon size={20} className="text-foreground/80" />
+    </div>
+
+    <div className="min-w-0">
+      <h3 className="mt-1 text-xl font-semibold tracking-tight">
+        {s.title}
+      </h3>
+    </div>
+  </div>
+
+  <Separator className="my-5" />
+
+  <p className="text-sm leading-relaxed text-foreground/85 max-w-prose">
+    {s.summary}
+  </p>
+</div>
+
+
+                  {/* Subtle hover polish */}
+                  <div className="pointer-events-none absolute inset-x-6 bottom-6 h-px bg-gradient-to-r from-transparent via-sky-500/35 to-transparent opacity-0 blur-[0.5px] transition-opacity duration-300 group-hover:opacity-100" />
+                  </Card>
             );
           })}
         </div>
