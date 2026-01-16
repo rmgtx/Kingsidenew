@@ -16,6 +16,7 @@ export * from './sections/WhyKingside';
 export * from './sections/AIStats';
 export * from './sections/BentoGrid';
 export * from './sections/IntelligentAutomation';
+export * from './sections/HowItWorks';
 export * from './sections/ContactForm';
 export * from './sections/Footer';
 export * from './ConfirmationModal';

@@ -171,3 +171,16 @@ html {
 .grid-hovering rect[class*="stroke-foreground"] {
   opacity: 0.8;
 }
+
+/* Glow Effects for Icon Boxes */
+.glow-accent {
+  box-shadow: 0 0 30px color-mix(in srgb, var(--color-accent) 40%, transparent);
+}
+
+.glow-chart-5 {
+  box-shadow: 0 0 30px color-mix(in srgb, var(--color-chart-5) 40%, transparent);
+}
+
+.glow-chart-4 {
+  box-shadow: 0 0 30px color-mix(in srgb, var(--color-chart-4) 40%, transparent);
+}
