@@ -5,8 +5,6 @@ import {
   InfoCardsSection,
   OrbitSection,
   AIStatisticsGrid,
-  BentoGrid,
-  IntelligentAutomation,
   ContactForm,
   Footer
 } from '@/components';
@@ -20,8 +18,6 @@ function App() {
       <InfoCardsSection />
       <OrbitSection />
       <AIStatisticsGrid />
-      <BentoGrid />
-      <IntelligentAutomation />
       <ContactForm />
       <Footer />
       <Toaster />
