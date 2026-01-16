@@ -1,6 +1,4 @@
 import React from "react";
-import {Card} from "@/components/ui/card";
-import {Separator} from "@/components/ui/separator";
 import {
   TrendUp,
   Clock,
@@ -10,19 +8,14 @@ import {
   GearSix
 } from "@phosphor-icons/react";
 
+
 type StatItem={
-  key:string;
+  key:StatKey;
   title:string;
   value:string;
   delta?:string;
   description:string;
-  source:string;
   Icon:React.ComponentType<any>;
-  variant:"wide"|"tall"|"standard";
-  chart:"ring"|"bars"|"spark"|"none";
-  ringValue?:number; // 0-100
-  bars?:number[];
-  spark?:number[];
 };
 
 const stats:StatItem[]=[
@@ -32,11 +25,7 @@ const stats:StatItem[]=[
     value:"88%",
     delta:"Now using AI",
     description:"AI is no longer optional — most businesses already use it in at least one function.",
-    source:"McKinsey & Company",
     Icon:TrendUp,
-    variant:"wide",
-    chart:"ring",
-    ringValue:88
   },
   {
     key:"time",
@@ -44,11 +33,7 @@ const stats:StatItem[]=[
     value:"40–60 min",
     delta:"Saved per employee/day",
     description:"AI tools reclaim time daily by automating repetitive work and accelerating execution.",
-    source:"OpenAI & Anthropic Workplace Study",
     Icon:Clock,
-    variant:"standard",
-    chart:"spark",
-    spark:[12,18,20,22,28,32,40,44,52,60]
   },
   {
     key:"cost",
@@ -58,9 +43,6 @@ const stats:StatItem[]=[
     description:"Automation cuts overhead across operations and improves margin efficiency.",
     source:"HypeStudio Research",
     Icon:Coins,
-    variant:"standard",
-    chart:"bars",
-    bars:[20,32,45,60]
   },
   {
     key:"efficiency",
@@ -68,11 +50,7 @@ const stats:StatItem[]=[
     value:"55%",
     delta:"Higher ops efficiency",
     description:"AI agents improve throughput, reduce delays, and tighten handoffs across teams.",
-    source:"Warmly.ai Survey",
     Icon:Lightning,
-    variant:"tall",
-    chart:"ring",
-    ringValue:55
   },
   {
     key:"revenue",
@@ -80,11 +58,7 @@ const stats:StatItem[]=[
     value:"10–25%",
     delta:"Growth reported",
     description:"AI-driven personalization and automation increase conversion, retention, and scale.",
-    source:"HypeStudio.org",
     Icon:ChartLineUp,
-    variant:"standard",
-    chart:"spark",
-    spark:[6,8,10,12,15,18,20,22,25]
   },
   {
     key:"scale",
@@ -92,55 +66,59 @@ const stats:StatItem[]=[
     value:"15–50%",
     delta:"Processes automated by 2027",
     description:"AI agents are forecast to automate a major share of business processes — scale becomes default.",
-    source:"IBM & Warmly.ai",
     Icon:GearSix,
-    variant:"wide",
-    chart:"bars",
-    bars:[15,25,35,50]
   }
 ];
 
-function Ring({value}:{value:number}){
-  // simple SVG ring; no external libs
-  const size=88;
-  const stroke=8;
+function clampPct(value:number){
+  return Math.max(0,Math.min(100,value));
+}
+
+function Ring({value,size=92}:{value:number;size?:number}){
+  const stroke=10;
   const r=(size-stroke)/2;
   const c=2*Math.PI*r;
-  const pct=Math.max(0,Math.min(100,value));
+  const pct=clampPct(value);
   const dash=c*(pct/100);
   const gap=c-dash;
 
   return(
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="shrink-0">
-      <circle
-        cx={size/2}
-        cy={size/2}
-        r={r}
-        fill="none"
-        stroke="rgba(15,23,42,0.08)"
-        strokeWidth={stroke}
-      />
-      <circle
-        cx={size/2}
-        cy={size/2}
-        r={r}
-        fill="none"
-        stroke="rgb(14,165,233)" // sky-500
-        strokeWidth={stroke}
-        strokeLinecap="round"
-        strokeDasharray={`${dash} ${gap}`}
-        transform={`rotate(-90 ${size/2} ${size/2})`}
-      />
-    </svg>
+    <div className="relative shrink-0">
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="block">
+        <circle
+          cx={size/2}
+          cy={size/2}
+          r={r}
+          fill="none"
+          stroke="rgba(148,163,184,0.25)"
+          strokeWidth={stroke}
+        />
+        <circle
+          cx={size/2}
+          cy={size/2}
+          r={r}
+          fill="none"
+          stroke="rgba(14,165,233,0.95)"
+          strokeWidth={stroke}
+          strokeLinecap="round"
+          strokeDasharray={`${dash} ${gap}`}
+          transform={`rotate(-90 ${size/2} ${size/2})`}
+        />
+      </svg>
+
+      <div className="absolute inset-0 grid place-items-center">
+        <div className="text-sm font-semibold text-foreground/90">{pct}%</div>
+      </div>
+    </div>
   );
 }
 
-function Bars({values}:{values:number[]}){
+function Bars({values,height=84}:{values:number[];height?:number}){
   const max=Math.max(...values,1);
   return(
-    <div className="flex items-end gap-2 h-[72px]">
+    <div className="flex items-end gap-2" style={{height}}>
       {values.map((v,i)=>(
-        <div key={i} className="w-3 rounded-full bg-sky-500/15 overflow-hidden">
+        <div key={i} className="w-3 rounded-full bg-sky-500/15 overflow-hidden" title={`${v}%`}>
           <div
             className="w-full rounded-full bg-sky-500"
             style={{height:`${Math.round((v/max)*100)}%`}}
@@ -152,8 +130,9 @@ function Bars({values}:{values:number[]}){
 }
 
 function Spark({values}:{values:number[]}){
-  const w=160;
-  const h=52;
+  // responsive: fills available width, fixed height
+  const w=220;
+  const h=64;
   const max=Math.max(...values,1);
   const min=Math.min(...values,0);
   const span=Math.max(1,max-min);
@@ -165,111 +144,290 @@ function Spark({values}:{values:number[]}){
   }).join(" ");
 
   return(
-    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} className="shrink-0">
+    <svg
+      viewBox={`0 0 ${w} ${h}`}
+      preserveAspectRatio="none"
+      className="block h-14 w-56 max-w-full"
+    >
+      <defs>
+        <linearGradient id="sparkFill" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stopColor="rgba(14,165,233,0.25)" />
+          <stop offset="1" stopColor="rgba(14,165,233,0.00)" />
+        </linearGradient>
+      </defs>
+
       <polyline
         points={points}
         fill="none"
-        stroke="rgba(14,165,233,0.9)"
+        stroke="rgba(14,165,233,0.95)"
         strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+
       <polyline
         points={`${points} ${w},${h} 0,${h}`}
-        fill="rgba(14,165,233,0.10)"
+        fill="url(#sparkFill)"
         stroke="none"
       />
     </svg>
   );
 }
 
-function StatCard({s}:{s:StatItem}){
-  const BgIcon=s.Icon;
-
-  const spanClass=
-    s.variant==="wide"
-      ? "lg:col-span-2"
-      : s.variant==="tall"
-        ? "lg:row-span-2"
-        : "";
-
+function Badge({text}:{text:string}){
   return(
-    <Card
-      className={[
-        "group relative overflow-hidden rounded-2xl bg-card shadow-md",
-        "border-0", // no border
-        "ring-1 ring-foreground/10", // softer than border
-        "transition-transform duration-300 hover:-translate-y-0.5",
-        spanClass
-      ].join(" ")}
-    >
-      {/* subtle background wash */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-foreground/[0.035] to-transparent" />
+    <span className="inline-flex items-center rounded-full bg-sky-500/10 px-3 py-1 text-xs font-semibold text-sky-500">
+      {text}
+    </span>
+  );
+}
 
-      {/* big faint icon (make it very subtle) */}
-      <div className="pointer-events-none absolute -right-10 -top-10 opacity-[0.04] blur-[0.5px]">
-        <BgIcon size={300} className="text-foreground" weight="thin" />
+function BentoShell({children,className=""}:{children:React.ReactNode;className?:string}){
+  return(
+    <div className={[
+      "group relative h-full overflow-hidden rounded-3xl",
+      "bg-background/70 backdrop-blur",
+      "ring-1 ring-foreground/10 hover:ring-sky-500/35",
+      "transition-transform duration-300 hover:-translate-y-0.5",
+      className
+    ].join(" ")}>
+      {/* subtle grid texture only (no watermark icons) */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.28]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(14,165,233,0.10) 1px, transparent 1px), linear-gradient(to bottom, rgba(14,165,233,0.08) 1px, transparent 1px)",
+          backgroundSize:"52px 52px"
+        }}
+      />
+
+      {/* hover glow */}
+      <div
+        className="pointer-events-none absolute -inset-24 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:"radial-gradient(circle at 28% 18%, rgba(14,165,233,0.22), transparent 60%)"
+        }}
+      />
+
+      <div className="relative h-full p-6 overflow-hidden">
+        {children}
       </div>
+    </div>
+  );
+}
 
-      <div className="relative p-6">
+function TileHeader({s}:{s:StatItem}){
+  return(
+    <div className="flex items-center gap-3 min-w-0">
+      <div className="grid h-10 w-10 place-items-center rounded-xl bg-sky-500/10 shrink-0">
+        <s.Icon size={18} className="text-sky-500" />
+      </div>
+      <div className="min-w-0">
+        <div className="text-sm font-semibold text-foreground truncate">{s.title}</div>
+        {s.delta ? <div className="text-xs text-muted-foreground truncate">{s.delta}</div> : null}
+      </div>
+    </div>
+  );
+}
+
+function TileFooter({s}:{s:StatItem}){
+  return(
+    <div className="mt-auto">
+      <div className="flex items-center justify-between gap-3">
+        <span className="text-[11px] text-muted-foreground truncate">
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function HeroTile({s}:{s:StatItem}){
+  return(
+    <BentoShell className="p-0">
+      <div className="relative h-full p-7 flex flex-col">
         <div className="flex items-start justify-between gap-6">
           <div className="min-w-0">
-            <div className="flex items-center gap-3">
-              <div className="grid h-11 w-11 place-items-center rounded-xl bg-sky-500/10">
-                <s.Icon size={20} className="text-sky-500" />
-              </div>
-              <h3 className="text-lg font-semibold tracking-tight text-foreground">
-                {s.title}
-              </h3>
-            </div>
-
-            <div className="mt-4 flex items-end gap-3">
-              <div className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground">
-                {s.value}
-              </div>
-              {s.delta ? (
-                <div className="pb-1 text-sm text-muted-foreground">
-                  {s.delta}
-                </div>
-              ) : null}
-            </div>
-
-            <p className="mt-3 max-w-prose text-sm leading-relaxed text-foreground/80">
+            <h3 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+              {s.value} adoption. <span className="text-sky-500">Already mainstream.</span>
+            </h3>
+            <p className="mt-3 max-w-xl text-sm text-foreground/80 leading-relaxed line-clamp-3">
               {s.description}
             </p>
           </div>
 
-          {/* chart area */}
-          <div className="hidden sm:flex items-center justify-end">
-            {s.chart==="ring" && typeof s.ringValue==="number" ? <Ring value={s.ringValue} /> : null}
-            {s.chart==="bars" && s.bars ? <Bars values={s.bars} /> : null}
-            {s.chart==="spark" && s.spark ? <Spark values={s.spark} /> : null}
+          {typeof s.ringValue==="number" ? (
+            <div className="hidden sm:block shrink-0">
+              <Ring value={s.ringValue} size={108} />
+            </div>
+          ) : null}
+        </div>
+
+        <div className="mt-6 grid grid-cols-12 gap-4">
+          <div className="col-span-12 sm:col-span-7">
+            <div className="rounded-2xl bg-sky-500/5 ring-1 ring-sky-500/15 p-4">
+              <div className="mt-2 text-3xl font-bold tracking-tight text-foreground">{s.value}</div>
+              <div className="mt-1 text-xs text-muted-foreground line-clamp-2">
+                Businesses using AI in at least one function
+              </div>
+            </div>
+          </div>
+
+          <div className="col-span-12 sm:col-span-5">
           </div>
         </div>
 
-        <Separator className="my-5" />
+        <TileFooter s={s} />
+      </div>
+    </BentoShell>
+  );
+}
 
-        <div className="flex items-center justify-between gap-3">
-          <span className="text-xs text-muted-foreground">
-            Source: <span className="text-foreground/70">{s.source}</span>
-          </span>
-
-          <span className="text-xs font-medium text-sky-500">
-            AI efficiency
-          </span>
+function SparkTile({s}:{s:StatItem}){
+  return(
+    <BentoShell>
+      <div className="h-full flex flex-col min-w-0">
+        <div className="flex items-start justify-between gap-4">
+          <TileHeader s={s} />
+          <Badge text="Time saved" />
         </div>
 
-        {/* blue hover line */}
-        <div className="pointer-events-none absolute inset-x-6 bottom-6 h-px bg-gradient-to-r from-transparent via-sky-500/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="mt-5 grid grid-cols-12 gap-4 items-end min-w-0">
+          <div className="col-span-12 sm:col-span-6 min-w-0">
+            <div className="text-4xl font-bold tracking-tight text-foreground">{s.value}</div>
+            <div className="mt-2 text-sm text-foreground/75 line-clamp-3">
+              {s.description}
+            </div>
+          </div>
+
+          <div className="col-span-12 sm:col-span-6 flex justify-start sm:justify-end min-w-0 overflow-hidden">
+            {s.spark ? <Spark values={s.spark} /> : null}
+          </div>
+        </div>
+
+        <TileFooter s={s} />
       </div>
-    </Card>
+    </BentoShell>
+  );
+}
+
+function BarsTile({s}:{s:StatItem}){
+  return(
+    <BentoShell>
+      <div className="h-full flex flex-col min-w-0">
+        <div className="flex items-start justify-between gap-4">
+          <TileHeader s={s} />
+          <Badge text="Cost impact" />
+        </div>
+
+        <div className="mt-5 grid grid-cols-12 gap-4 items-end min-w-0">
+          <div className="col-span-12 sm:col-span-7 min-w-0">
+            <div className="text-4xl font-bold tracking-tight text-foreground">{s.value}</div>
+            <p className="mt-2 text-sm text-foreground/75 line-clamp-3">
+              {s.description}
+            </p>
+          </div>
+
+          <div className="col-span-12 sm:col-span-5 flex justify-start sm:justify-end min-w-0">
+            {s.bars ? <Bars values={s.bars} height={84} /> : null}
+          </div>
+        </div>
+
+        <TileFooter s={s} />
+      </div>
+    </BentoShell>
+  );
+}
+
+function RingTile({s}:{s:StatItem}){
+  return(
+    <BentoShell>
+      <div className="h-full flex flex-col min-w-0">
+        <div className="flex items-start justify-between gap-4">
+          <TileHeader s={s} />
+          <Badge text="Efficiency" />
+        </div>
+
+        <div className="mt-6 flex items-center justify-between gap-6 min-w-0">
+          <div className="min-w-0">
+            <div className="text-5xl font-bold tracking-tight text-foreground">{s.value}</div>
+            <div className="mt-2 text-sm text-foreground/75 line-clamp-3">
+              {s.description}
+            </div>
+          </div>
+
+          <div className="hidden sm:block shrink-0">
+            {typeof s.ringValue==="number" ? <Ring value={s.ringValue} /> : null}
+          </div>
+        </div>
+
+        <TileFooter s={s} />
+      </div>
+    </BentoShell>
+  );
+}
+
+function MiniTile({s}:{s:StatItem}){
+  return(
+    <BentoShell>
+      <div className="h-full flex flex-col min-w-0">
+        <TileHeader s={s} />
+
+        <div className="mt-6 min-w-0">
+          <div className="text-4xl font-bold tracking-tight text-foreground">{s.value}</div>
+          <div className="mt-2 text-sm text-foreground/75 line-clamp-2">{s.delta}</div>
+        </div>
+
+        <div className="mt-4 hidden sm:block overflow-hidden">
+          {s.spark ? <Spark values={s.spark} /> : null}
+        </div>
+
+        <TileFooter s={s} />
+      </div>
+    </BentoShell>
+  );
+}
+
+function WideTile({s}:{s:StatItem}){
+  return(
+    <BentoShell>
+      <div className="h-full flex flex-col min-w-0">
+        <div className="flex items-start justify-between gap-4">
+          <TileHeader s={s} />
+          <Badge text="Automation scale" />
+        </div>
+
+        <div className="mt-6 grid grid-cols-12 gap-5 items-center min-w-0">
+          <div className="col-span-12 sm:col-span-7 min-w-0">
+            <div className="text-5xl font-bold tracking-tight text-foreground">{s.value}</div>
+            <p className="mt-2 text-sm text-foreground/75 line-clamp-3">
+              {s.description}
+            </p>
+          </div>
+
+          <div className="col-span-12 sm:col-span-5 flex justify-start sm:justify-end min-w-0">
+            {s.bars ? <Bars values={s.bars} height={90} /> : null}
+          </div>
+        </div>
+
+        <TileFooter s={s} />
+      </div>
+    </BentoShell>
   );
 }
 
 export function AIStatisticsGrid(){
+  const adoption=stats.find((s)=>s.key==="adoption")!;
+  const time=stats.find((s)=>s.key==="time")!;
+  const cost=stats.find((s)=>s.key==="cost")!;
+  const efficiency=stats.find((s)=>s.key==="efficiency")!;
+  const revenue=stats.find((s)=>s.key==="revenue")!;
+  const scale=stats.find((s)=>s.key==="scale")!;
+
   return(
-    <section className="w-full py-20">
-      <div className="mx-auto w-full max-w-6xl px-6">
+    <section className="relative w-full py-24">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-500/[0.06] via-transparent to-transparent" />
+
+      <div className="relative mx-auto w-full max-w-6xl px-6">
         <div className="mb-10">
           <p className="text-xs font-semibold tracking-widest text-sky-500 uppercase">
             AI efficiency at a glance
@@ -279,32 +437,37 @@ export function AIStatisticsGrid(){
             <span className="text-foreground">Measurable impact.</span>{" "}
             <span className="text-sky-500">Fast wins.</span>
           </h2>
-
-          <p className="mt-3 max-w-2xl text-base text-muted-foreground">
-            Six proof points that show why AI automation is now a competitive requirement.
-          </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-4 lg:auto-rows-[1fr]">
-          {stats.map((s)=>(
-            <div
-              key={s.key}
-              className={
-                s.variant==="wide"
-                  ? "lg:col-span-2"
-                  : s.variant==="tall"
-                    ? "lg:row-span-2 lg:col-span-2"
-                    : "lg:col-span-2"
-              }
-            >
-              <StatCard s={s} />
-            </div>
-          ))}
+        {/* IMPORTANT: taller row heights so nothing clips */}
+        <div className="grid gap-5 lg:grid-cols-12 lg:auto-rows-[210px] xl:lg:auto-rows-[220px]">
+          <div className="lg:col-span-7 lg:row-span-2">
+            <HeroTile s={adoption} />
+          </div>
+
+          <div className="lg:col-span-5 lg:row-span-1">
+            <SparkTile s={time} />
+          </div>
+
+          <div className="lg:col-span-5 lg:row-span-1">
+            <BarsTile s={cost} />
+          </div>
+
+          <div className="lg:col-span-4 lg:row-span-1">
+            <RingTile s={efficiency} />
+          </div>
+
+          <div className="lg:col-span-3 lg:row-span-1">
+            <MiniTile s={revenue} />
+          </div>
+
+          <div className="lg:col-span-5 lg:row-span-1">
+            <WideTile s={scale} />
+          </div>
         </div>
 
-        {/* small mobile chart hint */}
         <p className="mt-6 text-xs text-muted-foreground sm:hidden">
-          Tip: Charts appear on larger screens to keep mobile clean and readable.
+          Tip: Extra charts expand on larger screens to keep mobile clean.
         </p>
       </div>
     </section>
