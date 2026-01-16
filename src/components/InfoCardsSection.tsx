@@ -17,7 +17,7 @@ const services = [
     Icon:Lightning,
     bgIcon:CrownCross,
     summary:
-      "We eliminate busywork by building AI agents that route messages, respond instantly, and keep systems in sync. The result is cleaner handoffs, faster cycles, and consistent execution without chaos."
+      "We build AI agents and automation systems that remove manual work and keep operations moving. By intelligently routing tasks, responding in real time, and syncing systems, we help teams move faster, reduce friction, and scale without added complexity."
   },
   {
     key:"acquisition",
@@ -33,7 +33,7 @@ const services = [
     Icon:ShieldCheck,
     bgIcon:Horse,
     summary:
-      "We add monitoring, safeguards, and fallback paths so your systems stay reliable under pressure. Problems stay small, incidents drop, and confidence scales with growth."
+      "We design reliability into every AI solution we deliver. Through monitoring, safeguards, and fallback paths, we ensure systems perform under pressure and fail gracefully when needed. The result is fewer incidents, faster recovery, and AI you can trust as your business grows."
   }
 ];
 
