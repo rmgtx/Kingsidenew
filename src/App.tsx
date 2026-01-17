@@ -3,6 +3,7 @@ import {
   Navigation,
   Hero,
   HeroStats,
+  WhyKingside,
   InfoCardsSection,
   OrbitSection,
   HowItWorks,
@@ -17,6 +18,7 @@ function App() {
       <Navigation />
       <Hero />
       <HeroStats />
+      <WhyKingside />
       <InfoCardsSection />
       <OrbitSection />
       <HowItWorks />
