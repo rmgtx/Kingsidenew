@@ -13,8 +13,6 @@ export { default as InfoCardsSection } from "./sections/InfoCardsSection";
 export * from './sections/OrbitSection';
 export * from './sections/MrBottleneck';
 export * from './sections/WhyKingside';
-export * from './sections/AIStats';
-export * from './sections/BentoGrid';
 export * from './sections/IntelligentAutomation';
 export * from './sections/HowItWorks';
 export * from './sections/ContactForm';
