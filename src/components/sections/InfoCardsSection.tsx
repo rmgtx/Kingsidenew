@@ -1,119 +1,120 @@
 import React from "react";
-import {Card} from "@/components/ui/card";
-import {Separator} from "@/components/ui/separator";
-import {
-  Lightning,
-  Target,
-  ShieldCheck,
-  CrownCross,
-  Crown,
-  Horse,
-} from "@phosphor-icons/react";
+import { BrandButton } from "@/components";
+import { motion, useInView } from "framer-motion";
+import { Crosshair, PlusCircle, FileText } from "phosphor-react";
 
-const services = [
+const features = [
   {
-    key:"automation",
-    title:"AI Solutions",
-    Icon:Lightning,
-    bgIcon:CrownCross,
-    summary:
-      "We build AI agents and automation systems that remove manual work and keep operations moving. By intelligently routing tasks, responding in real time, and syncing systems, we help teams move faster, reduce friction, and scale without added complexity."
+    icon: Crosshair,
+    title: "Strategic decision making",
+    desc: "Harness the power of analytics to inform strategies, enabling targeted campaigns that resonate with your audience and drive results."
   },
   {
-    key:"acquisition",
-    title:"E2E Consulting",
-    Icon:Target,
-    bgIcon:Crown,
-    summary:
-      "We design and deliver end-to-end AI integrations that work in the real world. From strategy to deployment, we ensure systems scale reliably, teams understand how to use them, and adoption carries forward long after launch. The result is AI that actually gets used—driving consistent outcomes, confident teams, and long-term value."
+    icon: PlusCircle,
+    title: "Marketing automation",
+    desc: "Harness the power of analytics to inform strategies, enabling targeted campaigns that resonate with your audience and drive results."
   },
   {
-    key:"reliability",
-    title:"Risk & Reliability",
-    Icon:ShieldCheck,
-    bgIcon:Horse,
-    summary:
-      "We design reliability into every AI solution we deliver. Through monitoring, safeguards, and fallback paths, we ensure systems perform under pressure and fail gracefully when needed. The result is fewer incidents, faster recovery, and AI you can trust as your business grows."
+    icon: FileText,
+    title: "Content Creation",
+    desc: "Adopt a responsive content strategy that evolves with market trends, allowing timely updates that capture audience interest and engagement."
   }
 ];
 
-function Pill({children}:{children:React.ReactNode}){
-  return(
-    <span className="inline-flex items-center rounded-full border bg-background px-3 py-1 text-xs font-medium text-foreground/80">
-      {children}
-    </span>
-  );
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.14, delayChildren: 0.06 } }
+};
+
+const item = {
+  hidden: { opacity: 0, y: -14 },
+  show: { opacity: 1, y: 0 }
+};
+
+function useScrollReveal({ amount = 0.25, once = true } = {}) {
+  const ref = React.useRef<HTMLDivElement | null>(null);
+  const inView = useInView(ref, { amount, once });
+  return { ref, inView };
 }
 
-function Label({children}:{children:React.ReactNode}){
-  return(
-    <p className="text-[11px] font-semibold tracking-widest text-muted-foreground uppercase">
-      {children}
-    </p>
-  );
-}
+export default function InfoCardsSection() {
+  const { ref, inView } = useScrollReveal({ amount: 0.25, once: true });
 
-export function InfoCardsSection(){
-  return(
-    <section className="w-full py-20">
-      <div className="mx-auto w-full max-w-6xl px-6">
-        {/* Header */}
-        <div className="mb-10">
-        <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-  <span className="text-sky-500">Why Companies Choose Kingside.</span>{" "}
-</h2>
+  return (
+    <section className="w-full bg-white">
+      {/* Extra top padding creates breathing room from the Hero */}
+      <div className="mx-auto max-w-6xl px-6 pt-16 pb-24 sm:pt-20 sm:pb-28">
+        <motion.div
+          ref={ref}
+          variants={container}
+          initial="hidden"
+          animate={inView ? "show" : "hidden"}
+          className="mx-auto max-w-3xl text-center"
+        >
+          <motion.h2
+            variants={item}
+            transition={{ duration: 0.55, ease: "easeOut" }}
+            className="text-4xl font-semibold tracking-tight text-sky-500 sm:text-6xl"
+          >
+            Why Top Companies Choose Kingside
+          </motion.h2>
 
-          <p className="mt-3 max-w-2xl text-base text-muted-foreground">
-            Clear outcomes, fast implementation, and systems that hold up under real-world use.
-          </p>
-        </div>
+          <motion.p
+            variants={item}
+            transition={{ duration: 0.55, ease: "easeOut" }}
+            className="mt-5 text-base leading-relaxed text-neutral-500 sm:text-lg"
+          >
+            Leverage data-driven strategies and market analysis to identify opportunities, enhance performance, and foster sustainable growth for your business.
+          </motion.p>
 
-        {/* Cards */}
-        <div className="grid gap-6 lg:grid-cols-3">
-          {services.map((s)=>{
-            const BgIcon=s.bgIcon;
+          <motion.div
+            variants={item}
+            transition={{ duration: 0.55, ease: "easeOut" }}
+            className="mt-8 flex items-center justify-center"
+          >
+            <BrandButton
+              href="#contact"
+              variant="brandOutline"
+              size="lg"
+              aria-label="Contact us"
+            >
+              Contact us
+            </BrandButton>
+          </motion.div>
+        </motion.div>
 
-            return(
-              <Card
-                key={s.key}
-                className="group relative overflow-hidden rounded-2xl bg-card shadow-md"
+        {/* Center the grid and constrain width so it doesn't feel crowded */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate={inView ? "show" : "hidden"}
+          className="mx-auto mt-16 grid max-w-5xl gap-20 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {features.map((f) => {
+            const Icon = f.icon;
+
+            return (
+              <motion.div
+                key={f.title}
+                variants={item}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="mx-auto w-full max-w-sm text-center sm:text-left"
               >
-                {/* Gentle background */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-foreground/[0.04] to-transparent" />
-
-                {/* Soft background icon */}
-                <div className="pointer-events-none absolute -right-12 -top-12 opacity-[0.03] blur-[0.5px]">
-                  <BgIcon size={340} className="text-foreground" weight="thin" />
+                <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full border border-sky-200 sm:mx-0">
+                  <Icon size={20} weight="regular" className="text-sky-500" />
                 </div>
 
-                <div className="relative p-6">
-  {/* Top */}
-  <div className="flex items-start gap-4">
-    <div className="grid h-11 w-11 place-items-center rounded-xl border bg-muted">
-      <s.Icon size={20} className="text-foreground/80" />
-    </div>
+                <h3 className="text-xl font-semibold tracking-tight text-neutral-900">
+                  {f.title}
+                </h3>
 
-    <div className="min-w-0">
-      <h3 className="mt-1 text-xl font-semibold tracking-tight">
-        {s.title}
-      </h3>
-    </div>
-  </div>
-
-  <Separator className="my-5" />
-
-  <p className="text-sm leading-relaxed text-foreground/85 max-w-prose">
-    {s.summary}
-  </p>
-</div>
-
-
-                  {/* Subtle hover polish */}
-                  <div className="pointer-events-none absolute inset-x-6 bottom-6 h-px bg-gradient-to-r from-transparent via-sky-500/35 to-transparent opacity-0 blur-[0.5px] transition-opacity duration-300 group-hover:opacity-100" />
-                  </Card>
+                <p className="mt-3 text-sm leading-relaxed text-neutral-500">
+                  {f.desc}
+                </p>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

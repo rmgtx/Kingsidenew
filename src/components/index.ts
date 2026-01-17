@@ -8,9 +8,9 @@ export * from './ui/brand-button';
 
 export * from './sections/Navigation';
 export * from './sections/Hero';
-export * from "./sections/InfoCardsSection";
+export * from './sections/HeroStats';
+export { default as InfoCardsSection } from "./sections/InfoCardsSection";
 export * from './sections/OrbitSection';
-export * from "./AIStatisticsGrid";
 export * from './sections/MrBottleneck';
 export * from './sections/WhyKingside';
 export * from './sections/AIStats';

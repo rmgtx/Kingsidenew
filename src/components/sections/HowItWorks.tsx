@@ -22,109 +22,95 @@ const steps = [
   },
 ];
 
-// Helper to get color classes based on step color
 function getColorClasses(color: string) {
   switch (color) {
     case "accent":
-      return { bg: "bg-accent", glow: "glow-accent" };
+      return { bg: "bg-accent", dot: "bg-accent" };
     case "chart-5":
-      return { bg: "bg-chart-5", glow: "glow-chart-5" };
+      return { bg: "bg-chart-5", dot: "bg-chart-5" };
     case "chart-4":
-      return { bg: "bg-chart-4", glow: "glow-chart-4" };
+      return { bg: "bg-chart-4", dot: "bg-chart-4" };
     default:
-      return { bg: "bg-accent", glow: "glow-accent" };
+      return { bg: "bg-accent", dot: "bg-accent" };
   }
+}
+
+function DesktopConnectors() {
+  // 3 columns => connectors live BETWEEN col 1-2 and col 2-3
+  return (
+    <div className="hidden md:grid grid-cols-3 items-center mt-8 mb-10">
+      {/* spacer under step 1 icon */}
+      <div />
+
+      {/* connector between 1 and 2 (sits under the gap) */}
+      <div className="flex items-center justify-center">
+        <span className="h-2 w-2 rounded-full bg-accent" />
+        <span className="mx-4 h-px flex-1 border-t border-dotted border-foreground/20" />
+        <span className="h-2 w-2 rounded-full bg-chart-5" />
+      </div>
+
+      {/* connector between 2 and 3 */}
+      <div className="flex items-center justify-center">
+        <span className="h-2 w-2 rounded-full bg-chart-5" />
+        <span className="mx-4 h-px flex-1 border-t border-dotted border-foreground/20" />
+        <span className="h-2 w-2 rounded-full bg-chart-4" />
+      </div>
+    </div>
+  );
 }
 
 export function HowItWorks() {
   return (
     <section className="py-24 lg:py-32 px-5 sm:px-6 lg:px-8 bg-background">
       <div className="mx-auto max-w-7xl">
-        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
+          className="mb-12 text-center"
         >
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
             How it works?
           </h2>
         </motion.div>
 
-        {/* Steps Container */}
-        <div className="relative">
-          {/* Steps Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16">
-            {steps.map((step, index) => {
-              const Icon = step.icon;
-              const colors = getColorClasses(step.color);
+        {/* Steps */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16">
+          {steps.map((step, index) => {
+            const Icon = step.icon;
+            const colors = getColorClasses(step.color);
 
-              return (
-                <motion.div
-                  key={step.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="relative flex flex-col items-center text-center"
-                >
-                  {/* Icon Box with Glow - Fixed size */}
-                  <div className={`w-16 h-16 flex items-center justify-center rounded-xl ${colors.bg} ${colors.glow} mb-6`}>
-                    <Icon
-                      size={28}
-                      weight="fill"
-                      className="text-primary-foreground"
-                    />
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="font-heading text-xl sm:text-2xl font-bold mb-4">
-                    {step.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-xs">
-                    {step.description}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* Connector Lines with Dots (desktop only) */}
-          <div className="hidden md:block absolute inset-x-0 top-8 pointer-events-none">
-            <div className="grid grid-cols-3 gap-8 lg:gap-16">
-              {/* First connector: between step 1 and step 2 */}
-              <div className="flex items-center justify-end pr-0">
-                <div className="flex items-center flex-1 ml-16">
-                  {/* Left dot (accent color) */}
-                  <div className="w-2 h-2 rounded-full bg-accent shrink-0" />
-                  {/* Dashed line */}
-                  <div className="flex-1 h-px border-t-2 border-dashed border-border mx-1" />
-                  {/* Right dot (chart-5 color) */}
-                  <div className="w-2 h-2 rounded-full bg-chart-5 shrink-0" />
+            return (
+              <motion.div
+                key={step.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="flex flex-col items-center text-center"
+              >
+                {/* Icon */}
+                <div className={`w-20 h-20 grid place-items-center rounded-2xl ${colors.bg} shadow-lg`}>
+                  <Icon size={30} weight="fill" className="text-primary-foreground" />
                 </div>
-              </div>
 
-              {/* Second connector: between step 2 and step 3 */}
-              <div className="flex items-center justify-end pr-0">
-                <div className="flex items-center flex-1 ml-16">
-                  {/* Left dot (chart-5 color) */}
-                  <div className="w-2 h-2 rounded-full bg-chart-5 shrink-0" />
-                  {/* Dashed line */}
-                  <div className="flex-1 h-px border-t-2 border-dashed border-border mx-1" />
-                  {/* Right dot (chart-4 color) */}
-                  <div className="w-2 h-2 rounded-full bg-chart-4 shrink-0" />
-                </div>
-              </div>
+                {/* Title */}
+                <h3 className="mt-8 font-heading text-2xl sm:text-3xl font-bold">
+                  {step.title}
+                </h3>
 
-              {/* Empty third column to maintain grid alignment */}
-              <div />
-            </div>
-          </div>
+                {/* Description */}
+                <p className="mt-4 text-muted-foreground text-base sm:text-lg leading-relaxed max-w-sm">
+                  {step.description}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
+
+        {/* Dotted connectors (desktop only) */}
+        <DesktopConnectors />
       </div>
     </section>
   );
