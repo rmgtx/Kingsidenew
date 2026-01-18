@@ -110,7 +110,7 @@ export function HowItWorks() {
 
                   {/* Card Content - Removed Hover Effects */}
                   <div className="relative w-full h-full rounded-2xl border border-neutral-100 bg-white p-8 shadow-sm">
-                    <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-sky-50 text-sky-600">
+                    <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-sky-50 text-sky-500">
                       <Icon size={24} weight="fill" />
                     </div>
 

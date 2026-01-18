@@ -54,7 +54,7 @@ export function WhyKingside() {
                     <motion.h2
                         variants={item}
                         transition={{ duration: 0.55, ease: "easeOut" }}
-                        className="text-4xl font-semibold tracking-tight text-sky-500 sm:text-6xl"
+                        className="text-4xl font-semibold tracking-tight text-neutral-900 sm:text-6xl leading-tight"
                     >
                         Why Top Companies Choose Kingside
                     </motion.h2>
