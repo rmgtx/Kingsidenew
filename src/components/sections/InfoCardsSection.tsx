@@ -60,15 +60,10 @@ function InfoCard({ card, className = "" }: { card: typeof cards[0]; className?:
   // Use a simple div here, relying on the parent wrapper for entrance animation
   return (
     <div
-      className={`group relative h-full overflow-hidden rounded-3xl bg-white p-8 shadow-lg shadow-sky-500/5 ring-1 ring-neutral-100 transition-all duration-300 hover:shadow-xl hover:shadow-sky-500/10 hover:-translate-y-1 ${className}`}
+      className={`group relative h-full overflow-hidden rounded-3xl bg-white/40 backdrop-blur-md p-8 shadow-lg shadow-sky-500/5 ring-1 ring-white/60 transition-all duration-300 hover:bg-white/60 hover:shadow-xl hover:shadow-sky-500/10 hover:-translate-y-1 ${className}`}
     >
       {/* Decorative circle in top right */}
       <div className="absolute top-6 right-6 h-10 w-10 rounded-full bg-gradient-to-br from-sky-100 to-sky-50 ring-1 ring-sky-100 transition-all duration-300 group-hover:from-sky-200 group-hover:to-sky-100" />
-
-      {/* Number badge */}
-      <span className="text-sm font-medium text-neutral-400 tracking-wide">
-        {card.number}
-      </span>
 
       {/* Title */}
       <h3 className="mt-4 text-2xl font-bold tracking-tight text-neutral-900 leading-tight">
@@ -87,7 +82,7 @@ export function InfoCardsSection() {
   const { ref, inView } = useScrollReveal({ amount: 0.2, once: true });
 
   return (
-    <section className="w-full bg-gradient-to-b from-sky-50/40 to-sky-50/10">
+    <section className="w-full bg-gradient-to-b from-sky-100/50 via-sky-50/40 to-white/20">
       <div className="mx-auto max-w-6xl px-6 py-32 sm:py-40">
         <motion.div
           ref={ref}

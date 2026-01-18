@@ -10,18 +10,18 @@ export function Footer() {
       {/* Main Footer Content */}
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 py-16 lg:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
-          
+
           {/* Brand Column */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="lg:col-span-5 space-y-6"
           >
             <div className="flex items-center">
-              <img 
+              <img
                 src={`${import.meta.env.BASE_URL}kingside-wordmark-light.svg`}
-                alt="Kingside" 
+                alt="Kingside"
                 className="h-12 w-auto"
                 onError={(e) => {
                   // Fallback to the default wordmark if light version isn't present yet.
@@ -32,7 +32,7 @@ export function Footer() {
             <p className="text-primary-foreground/70 text-lg max-w-sm">
               Put your busy work in check. We help small businesses scale smarter with intelligent automation.
             </p>
-            
+
             {/* Social Links */}
             <div className="flex gap-3 pt-2">
               {[
@@ -40,9 +40,9 @@ export function Footer() {
                 { icon: InstagramLogo, href: "#", label: "Instagram" },
                 { icon: LinkedinLogo, href: "#", label: "LinkedIn" },
               ].map(({ icon: Icon, href, label }) => (
-                <a 
+                <a
                   key={label}
-                  href={href} 
+                  href={href}
                   aria-label={label}
                   className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-foreground/10 text-primary-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
                 >
@@ -53,7 +53,7 @@ export function Footer() {
           </motion.div>
 
           {/* Links Columns */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -98,7 +98,7 @@ export function Footer() {
           </motion.div>
 
           {/* Contact Column */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -109,8 +109,8 @@ export function Footer() {
               Get in Touch
             </h3>
             <div className="space-y-4">
-              <a 
-                href="mailto:hello@kingsidegroup.com" 
+              <a
+                href="mailto:hello@kingsidegroup.com"
                 className="flex items-center gap-3 text-primary-foreground/70 hover:text-primary-foreground transition-colors"
               >
                 <Envelope size={20} />
@@ -119,6 +119,7 @@ export function Footer() {
               <div className="text-primary-foreground/50 space-y-1 text-sm">
                 <p>Fort Worth, TX</p>
                 <p>Lehi, UT</p>
+                <p>Fort Pierce, FL</p>
               </div>
             </div>
           </motion.div>

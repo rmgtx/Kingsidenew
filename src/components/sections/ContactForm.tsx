@@ -14,7 +14,7 @@ export function ContactForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
@@ -41,12 +41,12 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-24 lg:py-32 px-5 sm:px-6 lg:px-8 bg-background">
+    <section id="contact" className="scroll-mt-12 pt-12 pb-24 lg:pt-16 lg:pb-32 px-5 sm:px-6 lg:px-8 bg-background">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          
+
           {/* Left Column - Message */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -61,7 +61,7 @@ export function ContactForm() {
                 Every winning strategy starts with a smart first move. Reach out today for a straightforward conversation about where your business is and where our digital solutions can take it.
               </p>
             </div>
-            
+
             {/* Value Props */}
             <div className="space-y-4">
               {[
@@ -86,81 +86,81 @@ export function ContactForm() {
           >
             <Card className="shadow-lg">
               <CardContent className="p-8 lg:p-10">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="firstName" className="text-sm font-medium">
+                        First name <span className="text-destructive">*</span>
+                      </Label>
+                      <Input
+                        id="firstName"
+                        name="firstName"
+                        required
+                        placeholder="Jane"
+                        className="h-12 px-4 bg-background border focus-visible:ring-1 focus-visible:ring-accent focus-visible:border-accent"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="lastName" className="text-sm font-medium">
+                        Last name <span className="text-destructive">*</span>
+                      </Label>
+                      <Input
+                        id="lastName"
+                        name="lastName"
+                        required
+                        placeholder="Doe"
+                        className="h-12 px-4 bg-background border focus-visible:ring-1 focus-visible:ring-accent focus-visible:border-accent"
+                      />
+                    </div>
+                  </div>
+
                   <div className="space-y-2">
-                    <Label htmlFor="firstName" className="text-sm font-medium">
-                      First name <span className="text-destructive">*</span>
+                    <Label htmlFor="businessName" className="text-sm font-medium">
+                      Business name <span className="text-destructive">*</span>
                     </Label>
-                    <Input 
-                      id="firstName" 
-                      name="firstName" 
-                      required 
-                      placeholder="Jane"
-                      className="h-12 px-4 bg-background border focus-visible:ring-accent focus-visible:border-accent"
+                    <Input
+                      id="businessName"
+                      name="businessName"
+                      required
+                      placeholder="Acme Corp"
+                      className="h-12 px-4 bg-background border focus-visible:ring-1 focus-visible:ring-accent focus-visible:border-accent"
                     />
                   </div>
+
                   <div className="space-y-2">
-                    <Label htmlFor="lastName" className="text-sm font-medium">
-                      Last name <span className="text-destructive">*</span>
+                    <Label htmlFor="email" className="text-sm font-medium">
+                      Email <span className="text-destructive">*</span>
                     </Label>
-                    <Input 
-                      id="lastName" 
-                      name="lastName" 
-                      required 
-                      placeholder="Doe"
-                      className="h-12 px-4 bg-background border focus-visible:ring-accent focus-visible:border-accent"
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="jane@example.com"
+                      className="h-12 px-4 bg-background border focus-visible:ring-1 focus-visible:ring-accent focus-visible:border-accent"
                     />
                   </div>
-                </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="businessName" className="text-sm font-medium">
-                    Business name <span className="text-destructive">*</span>
-                  </Label>
-                  <Input 
-                    id="businessName" 
-                    name="businessName" 
-                    required 
-                    placeholder="Acme Corp"
-                    className="h-12 px-4 bg-background border focus-visible:ring-accent focus-visible:border-accent"
-                  />
-                </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone" className="text-sm font-medium">
+                      Phone <span className="text-destructive">*</span>
+                    </Label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      required
+                      placeholder="(555) 555-5555"
+                      className="h-12 px-4 bg-background border focus-visible:ring-1 focus-visible:ring-accent focus-visible:border-accent"
+                    />
+                  </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm font-medium">
-                    Email <span className="text-destructive">*</span>
-                  </Label>
-                  <Input 
-                    id="email" 
-                    name="email" 
-                    type="email" 
-                    required 
-                    placeholder="jane@example.com"
-                    className="h-12 px-4 bg-background border focus-visible:ring-accent focus-visible:border-accent"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-sm font-medium">
-                    Phone <span className="text-destructive">*</span>
-                  </Label>
-                  <Input 
-                    id="phone" 
-                    name="phone" 
-                    type="tel" 
-                    required 
-                    placeholder="(555) 555-5555"
-                    className="h-12 px-4 bg-background border focus-visible:ring-accent focus-visible:border-accent"
-                  />
-                </div>
-
-                <div className="pt-4">
-                  <BrandButton type="submit" variant="brand" aria-label="Send message">
-                    {isSubmitting ? "Sending..." : "Send message"}
-                  </BrandButton>
-                </div>
-              </form>
+                  <div className="pt-4">
+                    <BrandButton type="submit" variant="brand" aria-label="Send message">
+                      {isSubmitting ? "Sending..." : "Send message"}
+                    </BrandButton>
+                  </div>
+                </form>
               </CardContent>
             </Card>
           </motion.div>

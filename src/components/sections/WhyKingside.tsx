@@ -74,7 +74,7 @@ export function WhyKingside() {
                     >
                         <BrandButton
                             href="#contact"
-                            variant="brandOutline"
+                            variant="brand"
                             size="lg"
                             aria-label="Contact us"
                         >

@@ -8,19 +8,19 @@ export function Hero() {
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if (!gridContainerRef.current) return;
-    
+
     const rect = gridContainerRef.current.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
-    
+
     // Calculate the snapped grid coordinates (30px grid size)
     const gridSize = 30;
     const col = Math.floor(mouseX / gridSize);
     const row = Math.floor(mouseY / gridSize);
-    
+
     const squareX = col * gridSize;
     const squareY = row * gridSize;
-    
+
     gridContainerRef.current.style.setProperty('--mouse-x', `${mouseX}px`);
     gridContainerRef.current.style.setProperty('--mouse-y', `${mouseY}px`);
     gridContainerRef.current.style.setProperty('--grid-x', `${squareX}px`);
@@ -36,9 +36,9 @@ export function Hero() {
     >
       {/* Grid Pattern Background */}
       <div ref={gridContainerRef} className={`absolute inset-0 z-0 ${isHovering ? 'grid-hovering' : ''}`}>
-        <GridPattern 
-          width={30} 
-          height={30} 
+        <GridPattern
+          width={30}
+          height={30}
           className="opacity-100"
         />
       </div>
@@ -59,7 +59,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-xs sm:text-sm font-medium tracking-widest uppercase text-muted-foreground mb-6"
+              className="text-xs sm:text-sm font-medium tracking-widest uppercase text-sky-500 mb-6"
             >
               AI Automation for Growth-Minded Founders
             </motion.p>
@@ -110,7 +110,7 @@ export function Hero() {
             </motion.div>
           </div>
 
-          </div>
+        </div>
       </div>
 
       {/* Marketing professional image - hidden on mobile, visible on lg+ */}
@@ -141,7 +141,7 @@ export function Hero() {
             }}
           />
         </div>
-        
+
         {/* Image container - Marketing professional WebP */}
         <div className="relative h-full">
           <img
