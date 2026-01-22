@@ -16,7 +16,7 @@ Before making any changes, read these documents first:
 | Document | Location | Purpose |
 |----------|----------|---------|
 | **FRESH_START_GUIDE.md** | Root directory | Complete rebuild guide, all content, architecture |
-| **BRAND_COMPONENTS.md** | Root directory | Legacy component code (NeuBrutalistButton deprecated, use BrandButton) |
+| **BRAND_COMPONENTS.md** | Root directory | Brand patterns reference (neubrutalist shadows, typography) |
 
 ### Key Changes from Old Approach
 
@@ -528,7 +528,6 @@ import { BrandButton } from '@/components/ui/brand-button';
 
 **DO NOT use:**
 - Standard anchor tags styled as buttons
-- The deprecated `NeuBrutalistButton` component
 - Custom one-off button implementations
 
 ### 2. Grid Layout (Required for Grids)

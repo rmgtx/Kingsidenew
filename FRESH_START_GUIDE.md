@@ -37,7 +37,7 @@ This document provides everything needed to rebuild the Kingside website from sc
 Only preserve these brand-specific elements:
 1. **Colors** - Our specific palette (linen, black, blue, purple, red)
 2. **Fonts** - Poppins headings, Raleway body
-3. **NeuBrutalistButton** - The spring-physics floating shadow animation
+3. **BrandButton** - The radial fill + parallax animation (see `src/components/ui/brand-button.tsx`)
 4. **Logo** - Company logo components
 5. **Content** - All text/copy from the current site
 
@@ -57,7 +57,7 @@ Everything else should use shadcn patterns:
 If you're unsure whether to create a custom solution or use shadcn:
 1. Check if shadcn has a component for it → Use shadcn
 2. Check if shadcn has a pattern for it → Follow the pattern
-3. Only create custom if it's brand-critical (like NeuBrutalistButton)
+3. Only create custom if it's brand-critical (like BrandButton)
 
 ---
 
@@ -158,31 +158,31 @@ If you're unsure whether to create a custom solution or use shadcn:
 --radius-2xl: 16px;   /* Large cards */
 ```
 
-### 1.4 NeuBrutalistButton Animation (CRITICAL - PRESERVE EXACTLY)
+### 1.4 BrandButton Animation (CRITICAL - PRESERVE EXACTLY)
 
-This is the signature brand element. The animation logic MUST be preserved.
-
-**Spring Physics Config:**
-```typescript
-const SPRING_OPTIONS = {
-  mass: 1.5,
-  stiffness: 500,
-  damping: 100,
-};
-```
+This is the signature brand element. Located at `src/components/ui/brand-button.tsx`.
 
 **Animation Behavior:**
-1. **Resting state:** Button sits flat
-2. **Mouse move:** Button floats 6-12px based on cursor position, revealing colored shadow beneath
-3. **Mouse leave:** Spring physics animate button back to rest
-4. **Text slide:** On hover, text slides up and duplicate slides in from below
-5. **Arrow transition:** Arrow slides in, transitioning from accent color to text color
+1. **Radial fill** - Accent-blue expands from cursor position on hover
+2. **Cursor-follow parallax** - Subtle ±2px movement following mouse
+3. **Sheen sweep** - Light sweep effect on hover
+4. **Micro-press** - Subtle press animation on click
+5. **Accessible focus states** - shadcn baseline focus rings
 
-**Shadow Colors:**
-- Primary variant: Blue (#20A4F3) shadow
-- Secondary variant: Purple (#C77CFF) shadow
+**Usage:**
+```tsx
+import { BrandButton } from '@/components/ui/brand-button';
 
-**Full Component Source:** See `src/components/NeuBrutalistButton.tsx` in current codebase.
+// Primary CTA
+<BrandButton href="#contact" variant="brand" size="lg">
+  Book a Call
+</BrandButton>
+
+// Secondary CTA
+<BrandButton href="#services" variant="brandOutline" size="lg">
+  Learn More
+</BrandButton>
+```
 
 ### 1.5 Neubrutalist Card Pattern
 
@@ -431,16 +431,13 @@ COMPETITIVE ADVANTAGE (blue accent on "COMPETITIVE")
 | `Tabs` | Tab navigation | Need to create |
 | `Sheet` | Mobile nav drawer | Need to create |
 
-### 3.2 Custom Components (Preserve/Recreate)
+### 3.2 Custom Components
 
-| Component | Source | Notes |
-|-----------|--------|-------|
-| `NeuBrutalistButton` | Keep exactly | Signature brand animation |
-| `NeuCard` | Create new | Wrapper for neubrutalist shadow pattern |
-| `AnimatedTaskText` | Keep exactly | Hero rotating text |
-| `ChessPiecesScroll` | Review | May simplify |
-| `ShiftHighlightTabs` | Keep | Custom tab styling |
-| `ConfirmationModal` | Keep | Success modal with spring animation |
+| Component | Location | Notes |
+|-----------|----------|-------|
+| `BrandButton` | `src/components/ui/brand-button.tsx` | Primary CTA with radial fill animation |
+| `GridPattern` | `src/components/brand/GridPattern.tsx` | Background pattern for Hero |
+| `ConfirmationModal` | `src/components/ConfirmationModal.tsx` | Success modal with spring animation |
 
 ### 3.3 Recommended File Structure
 
@@ -458,9 +455,7 @@ src/
 │   │   ├── tabs.tsx
 │   │   └── sheet.tsx
 │   ├── brand/                 # Custom brand components
-│   │   ├── NeuBrutalistButton.tsx
-│   │   ├── NeuCard.tsx
-│   │   └── AnimatedTaskText.tsx
+│   │   └── GridPattern.tsx
 │   ├── sections/              # Page sections
 │   │   ├── Navigation.tsx
 │   │   ├── Hero.tsx
@@ -509,9 +504,8 @@ npx shadcn@latest add button card input label textarea badge separator tabs shee
 ### Phase 3: Create Brand Components
 
 **Order:**
-1. `NeuBrutalistButton` - Copy from current codebase, update to Phosphor icons
-2. `NeuCard` - Create wrapper for shadow pattern
-3. `AnimatedTaskText` - Copy from current codebase
+1. `BrandButton` - Already exists at `src/components/ui/brand-button.tsx`
+2. Use shadcn Card with inline neubrutalist shadow pattern as needed
 
 ### Phase 4: Build Sections
 
@@ -637,14 +631,12 @@ This means:
 3. **Set up project with shadcn CLI** - let it configure things its way
 4. **Add brand colors to shadcn's CSS variables**
 5. **Add brand fonts**
-6. **Copy NeuBrutalistButton** - this is the ONE custom component
+6. **Use BrandButton** - the custom CTA component at `src/components/ui/brand-button.tsx`
 7. **Build sections using shadcn components**
 8. **Use shadcn Tabs** for IntelligentAutomation (not custom tabs)
 9. **Use shadcn Sheet** for mobile nav (not custom drawer)
-10. **Simplify ChessPiecesScroll** - static or simple CSS animation
 
 ### Don't:
-- Modify NeuBrutalistButton animation logic
 - Change brand colors
 - Use Lucide icons (use Phosphor)
 - Create custom components when shadcn has an equivalent

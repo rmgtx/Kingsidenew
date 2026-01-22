@@ -42,9 +42,9 @@ Update this section as you complete tasks. Check the box and add completion date
 - [ ] Test theme renders correctly
 
 ### Phase 3: Port Custom Components
-- [x] Port NeuBrutalistButton (update ArrowRight to Phosphor) - Jan 10, 2026
-- [ ] Port AnimatedTaskText (if needed)
-- [ ] Copy chess piece assets to correct location
+- [x] BrandButton created at `src/components/ui/brand-button.tsx` - Jan 10, 2026
+- [x] Legacy components (NeuBrutalistButton, AnimatedTaskText, NeuCard, AnimatedNeuCard) archived and removed - Jan 22, 2026
+- [x] Chess piece assets in correct location
 
 ### Phase 3.5: Create shadcn Components (Manual - Registry Unavailable)
 - [x] Button component - Jan 10, 2026
@@ -60,7 +60,7 @@ Update this section as you complete tasks. Check the box and add completion date
 ### Phase 3.6: Migrate Lucide Icons to Phosphor
 - [x] Navigation.tsx (Menu, X → List, X) - Jan 12, 2026
 - [x] ConfirmationModal.tsx (CheckCircle) - Jan 12, 2026
-- [x] NeuBrutalistButton.tsx (ArrowRight) - Jan 10, 2026
+- [x] All components now use Phosphor Icons - Jan 22, 2026
 
 ### Phase 4: Rebuild Sections
 All sections reviewed - existing components are compatible with shadcn approach.
@@ -125,25 +125,18 @@ Map these Kingside colors to shadcn CSS variables:
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Raleway:wght@400;500;600;700&display=swap');
 ```
 
-### NeuBrutalistButton - DO NOT MODIFY ANIMATION LOGIC
+### BrandButton - Primary CTA Component
 
-This component MUST be preserved exactly. Location: `src/components/NeuBrutalistButton.tsx`
+Location: `src/components/ui/brand-button.tsx`
 
-Key features to maintain:
-1. Spring physics: `{ mass: 1.5, stiffness: 500, damping: 100 }`
-2. Mouse-tracking shadow reveal (6-12px range)
-3. Text slide animation on hover
-4. Arrow color transition (accent → text color)
-5. 56px minimum touch target
+Key features:
+1. Radial fill animation (accent-blue expands from cursor)
+2. Cursor-follow parallax (subtle ±2px movement)
+3. Sheen sweep on hover
+4. Micro-press animation on click
+5. Accessible focus states
 
-Only change needed: Update icon import from lucide-react to Phosphor:
-```tsx
-// OLD
-import { ArrowRight } from "lucide-react";
-
-// NEW
-import { ArrowRight } from "@phosphor-icons/react";
-```
+**Note:** The legacy NeuBrutalistButton has been archived and removed. Use BrandButton for all CTAs.
 
 ---
 
@@ -161,8 +154,8 @@ src/
 │   ├── IntelligentAutomation.tsx  # Tabs/features section
 │   ├── ContactForm.tsx     # Form with validation
 │   ├── Footer.tsx          # Site footer
-│   ├── NeuBrutalistButton.tsx  # PRESERVE THIS
-│   ├── AnimatedTaskText.tsx    # Text animation
+│   ├── brand/                 # Brand components (GridPattern)
+│   │   └── GridPattern.tsx
 │   ├── ChessPiecesScroll.tsx   # Chess branding
 │   └── ui/                 # Old shadcn-style components
 ├── design-system/
@@ -186,7 +179,8 @@ src/
 │   ├── IntelligentAutomation.tsx  # Rebuilt with shadcn
 │   ├── ContactForm.tsx     # Rebuilt with shadcn
 │   ├── Footer.tsx          # Rebuilt with shadcn
-│   └── NeuBrutalistButton.tsx  # PORTED (preserved)
+│   └── brand/
+│       └── GridPattern.tsx    # Background pattern
 ├── lib/
 │   └── utils.ts            # shadcn utilities (cn function)
 ├── styles/
@@ -261,7 +255,7 @@ Document any architectural or design decisions here:
 1. **shadcn/ui over RetroUI** - Chosen for larger ecosystem, better long-term support, and more component options
 2. **Phosphor Icons over Lucide** - More weight variants (thin, light, regular, bold, fill, duotone)
 3. **Fresh rebuild over migration** - Cleaner result, avoids CSS conflicts, faster for small site
-4. **Preserve NeuBrutalistButton exactly** - Core brand element with sophisticated animation
+4. **BrandButton as primary CTA** - Core brand element with radial fill animation
 
 ---
 
