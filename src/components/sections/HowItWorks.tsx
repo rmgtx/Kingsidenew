@@ -1,6 +1,6 @@
 import { BrandButton } from "@/components";
 import { CalendarCheck, ChatCircleDots, ClipboardText } from "@phosphor-icons/react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const steps = [
   {
