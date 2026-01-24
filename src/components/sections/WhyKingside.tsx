@@ -1,6 +1,6 @@
 import React from "react";
 import { BrandButton } from "@/components";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from "motion/react";
 import { Crosshair, PlusCircle, FileText } from "phosphor-react";
 
 const features = [
