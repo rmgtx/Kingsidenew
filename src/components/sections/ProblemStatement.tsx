@@ -65,19 +65,18 @@ const StatementBlock = React.memo(function StatementBlock({
   parentInView,
 }: StatementBlockProps) {
   const entranceDelay = BLOCK_ENTRANCE_DELAY + index * BLOCK_STAGGER;
-
-  // Each block observes its own viewport presence for the strikethrough
   const blockRef = React.useRef<HTMLDivElement | null>(null);
-  const blockInView = useInView(blockRef, { amount: 0.6, once: true });
 
+  // Use parentInView + stagger instead of separate blockInView
   const [strikeComplete, setStrikeComplete] = React.useState(false);
 
-  // After strikethrough finishes drawing, reveal the solution
   React.useEffect(() => {
-    if (!blockInView) return;
-    const timer = setTimeout(() => setStrikeComplete(true), STRIKETHROUGH_DURATION);
+    if (!parentInView) return;
+    // Delay strikethrough based on entrance + extra pause
+    const strikeDelay = (entranceDelay + 0.3) * 1000;
+    const timer = setTimeout(() => setStrikeComplete(true), strikeDelay + STRIKETHROUGH_DURATION);
     return () => clearTimeout(timer);
-  }, [blockInView]);
+  }, [parentInView, entranceDelay]);
 
   return (
     <motion.div
@@ -86,7 +85,7 @@ const StatementBlock = React.memo(function StatementBlock({
       animate={parentInView ? { opacity: 1, y: 0, scale: 1 } : {}}
       transition={{ delay: entranceDelay, duration: 0.6, ease: EASING }}
       className={cn(
-        "relative rounded-2xl p-8 sm:p-10 lg:p-12 transition-all duration-700",
+        "relative rounded-2xl p-6 sm:p-8 lg:p-10 transition-all duration-700",
         strikeComplete
           ? "bg-accent/[0.04] ring-1 ring-accent/20 shadow-md shadow-accent/5"
           : "bg-white ring-1 ring-neutral-200/60 shadow-sm"
@@ -95,9 +94,9 @@ const StatementBlock = React.memo(function StatementBlock({
       {/* Icon */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
-        animate={blockInView ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 0.4, ease: EASING }}
-        className="mb-4 sm:mb-5"
+        animate={parentInView ? { opacity: 1, scale: 1 } : {}}
+        transition={{ delay: entranceDelay + 0.1, duration: 0.4, ease: EASING }}
+        className="mb-3 sm:mb-4"
       >
         <Icon
           size={28}
@@ -109,28 +108,20 @@ const StatementBlock = React.memo(function StatementBlock({
         />
       </motion.div>
 
-      {/* Pain text with strikethrough */}
-      <div className="relative inline-block">
-        <span
-          className={cn(
-            "text-xl sm:text-2xl lg:text-3xl font-heading font-medium transition-colors duration-500",
-            strikeComplete ? "text-muted-foreground/40" : "text-foreground"
-          )}
-        >
-          {pain}
-        </span>
-        <motion.div
-          aria-hidden="true"
-          className="absolute left-0 top-1/2 -translate-y-1/2 h-[2px] w-full bg-accent/50 origin-left"
-          initial={{ scaleX: 0 }}
-          animate={blockInView ? { scaleX: 1 } : { scaleX: 0 }}
-          transition={{ duration: 0.5, ease: EASING }}
-        />
-      </div>
+      {/* Pain text with CSS strikethrough */}
+      <span
+        className={cn(
+          "text-lg sm:text-xl lg:text-2xl font-heading font-medium transition-all duration-500 block",
+          strikeComplete && "line-through decoration-accent/50 decoration-2",
+          strikeComplete ? "text-muted-foreground/40" : "text-foreground"
+        )}
+      >
+        {pain}
+      </span>
 
       {/* Solution text — fades in after strikethrough completes */}
       <motion.p
-        className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-foreground mt-4 sm:mt-5"
+        className="text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-foreground mt-3 sm:mt-4"
         initial={{ opacity: 0, y: 12 }}
         animate={strikeComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
         transition={{ duration: 0.5, ease: EASING }}
