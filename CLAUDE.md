@@ -481,6 +481,18 @@ body { overflow-x: hidden; width: 100%; }
 - Tab order follows visual hierarchy
 - Enter/Space activates buttons
 
+### 7. Frontend Aesthetics (Anti-Slop Guidelines)
+
+When building UI for this project, avoid generic "AI-generated" patterns:
+
+**Motion:** Prioritize high-impact moments over scattered micro-interactions. One well-orchestrated section entrance with staggered reveals (`animation-delay`) creates more delight than random hover effects. Use the Motion library for React animations. CSS-only for simple transitions.
+
+**Layout:** Avoid cookie-cutter component arrangements. Consider visual hierarchy, breathing room, and intentional asymmetry within the established Grid component system.
+
+**Polish:** Small details matter - consistent spacing, aligned baselines, purposeful whitespace. The difference between "AI-generated" and "designed" is usually in the details, not the creativity.
+
+**⚠️ IMPORTANT:** All aesthetic choices MUST use the established design tokens, brand colors, typography (Poppins/Raleway), and component library (shadcn/ui + BrandButton). Creativity lives in **composition and motion**, not in overriding the design system. Never introduce new fonts, color palettes, or arbitrary values in the name of "creativity."
+
 ---
 
 ## Component Patterns

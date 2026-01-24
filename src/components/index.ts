@@ -5,6 +5,7 @@ export * from './ui/brand-button';
 export * from './sections/Navigation';
 export * from './sections/Hero';
 export * from './sections/HeroStats';
+export * from './sections/ProblemStatement';
 export * from './sections/WhyKingside';
 export * from './sections/InfoCardsSection';
 export * from './sections/OrbitSection';

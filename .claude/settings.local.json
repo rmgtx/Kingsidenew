@@ -13,7 +13,9 @@
       "Bash(git push:*)",
       "Bash(find:*)",
       "Bash(npm run build:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run dev)"
     ]
   }
 }
