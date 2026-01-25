@@ -1,4 +1,4 @@
-import { BrandButton } from "@/components";
+import { BrandButton, GridPattern } from "@/components";
 import { CalendarCheck, ChatCircleDots, ClipboardText } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 
@@ -40,6 +40,26 @@ const itemVariants = {
 export function HowItWorks() {
   return (
     <section className="relative overflow-hidden bg-background pt-24 pb-12 lg:pt-32 lg:pb-16">
+      {/* Grid Pattern Background (Static) */}
+      <div className="absolute inset-0 z-0">
+        <GridPattern
+          width={30}
+          height={30}
+          className="opacity-30"
+          flip={true}
+        />
+      </div>
+
+      {/* Gradient fades for smooth transitions */}
+      <div
+        className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-background to-transparent z-[1]"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent z-[1]"
+        aria-hidden="true"
+      />
+
       {/* Faint Background Text */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0">
         <span className="text-[10rem] sm:text-[13rem] lg:text-[18rem] font-bold text-neutral-100/60 tracking-tighter sm:tracking-normal whitespace-nowrap">
