@@ -11,5 +11,6 @@ export * from './sections/InfoCardsSection';
 export * from './sections/OrbitSection';
 export * from './sections/HowItWorks';
 export * from './sections/ContactForm';
+export * from './sections/PrivacyPolicyModal';
 export * from './sections/Footer';
 export * from './ConfirmationModal';
