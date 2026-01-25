@@ -3,6 +3,7 @@ import { motion, useInView } from "motion/react";
 import { ChartBar, Target, Lightning } from "@phosphor-icons/react";
 import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
+import { GridPattern } from "@/components";
 
 // --- Data ---
 const PAIRS: {
@@ -137,8 +138,21 @@ export function ProblemStatement() {
   const inView = useInView(containerRef, { amount: 0.2, once: true });
 
   return (
-    <section className="w-full bg-background" aria-label="Problems we solve">
-      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 py-24 lg:py-32">
+    <section className="relative overflow-hidden w-full bg-background" aria-label="Problems we solve">
+      {/* Grid Pattern Background (Static) */}
+      <div className="absolute inset-0 z-0">
+        <GridPattern
+          width={30}
+          height={30}
+          className="opacity-20"
+        />
+      </div>
+
+      {/* Gradient fades for smooth transitions */}
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-background to-transparent z-[1]" aria-hidden="true" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent z-[1]" aria-hidden="true" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 py-24 lg:py-32">
         <motion.div
           ref={containerRef}
           initial="hidden"

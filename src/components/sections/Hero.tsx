@@ -29,7 +29,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative overflow-hidden bg-background group"
+      className="relative overflow-hidden bg-background group border-b border-border"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
