@@ -79,7 +79,7 @@ export function ContactForm() {
         <GridPattern
           width={30}
           height={30}
-          className="opacity-25"
+          className="opacity-70"
         />
       </div>
 

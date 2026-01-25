@@ -16,7 +16,16 @@
       "Bash(grep:*)",
       "Bash(npm run lint)",
       "Bash(npm run dev)",
-      "Bash(npx eslint:*)"
+      "Bash(npx eslint:*)",
+      "Bash(npx @anthropic-ai/mcp-playwright@latest --help)",
+      "WebSearch",
+      "Bash(claude mcp add:*)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_press_key",
+      "mcp__playwright__browser_close"
     ]
   }
 }

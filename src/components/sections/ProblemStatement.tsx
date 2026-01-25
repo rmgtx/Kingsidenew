@@ -88,7 +88,7 @@ const StatementBlock = React.memo(function StatementBlock({
       className={cn(
         "relative rounded-2xl p-6 sm:p-8 lg:p-10 transition-all duration-700",
         strikeComplete
-          ? "bg-accent/[0.04] ring-1 ring-accent/20 shadow-md shadow-accent/5"
+          ? "bg-[#f7fcff] ring-1 ring-accent/30 shadow-md shadow-accent/10"
           : "bg-white ring-1 ring-neutral-200/60 shadow-sm"
       )}
     >
@@ -144,7 +144,7 @@ export function ProblemStatement() {
         <GridPattern
           width={30}
           height={30}
-          className="opacity-20"
+          className="opacity-70"
         />
       </div>
 

@@ -45,7 +45,7 @@ export function HowItWorks() {
         <GridPattern
           width={30}
           height={30}
-          className="opacity-30"
+          className="opacity-70"
           flip={true}
         />
       </div>
