@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from "motion/react";
 import { X, ShieldCheck } from "@phosphor-icons/react";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { BrandButton } from "@/components/ui/brand-button";
 
 interface PrivacyPolicyModalProps {
   isOpen: boolean;
@@ -47,12 +49,14 @@ export function PrivacyPolicyModal({ isOpen, setIsOpen }: PrivacyPolicyModalProp
                 </div>
                 <h2 className="text-xl font-heading font-bold text-foreground">Privacy Policy</h2>
               </div>
-              <button
+              <Button
                 onClick={() => setIsOpen(false)}
-                className="text-muted-foreground hover:text-foreground transition-colors p-2 hover:bg-muted rounded-full"
+                variant="ghost"
+                size="icon"
+                aria-label="Close privacy policy"
               >
                 <X size={20} />
-              </button>
+              </Button>
             </div>
 
             {/* Content - Scrollable */}
@@ -103,12 +107,13 @@ export function PrivacyPolicyModal({ isOpen, setIsOpen }: PrivacyPolicyModalProp
 
             {/* Footer */}
             <div className="p-6 border-t border-border bg-muted/30 rounded-b-xl flex justify-end">
-              <button
+              <BrandButton
                 onClick={() => setIsOpen(false)}
-                className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity text-sm"
+                variant="brand"
+                size="lg"
               >
                 Acknowledge
-              </button>
+              </BrandButton>
             </div>
           </motion.div>
         </motion.div>

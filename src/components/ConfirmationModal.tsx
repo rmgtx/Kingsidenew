@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 import { CheckCircle } from "@phosphor-icons/react";
+import { BrandButton } from "@/components/ui/brand-button";
 
 interface ConfirmationModalProps {
   isOpen: boolean;
@@ -49,12 +50,14 @@ export function ConfirmationModal({ isOpen, setIsOpen }: ConfirmationModalProps)
                 </p>
 
                 {/* Button */}
-                <button
+                <BrandButton
                   onClick={() => setIsOpen(false)}
-                  className="w-full sm:w-auto px-8 py-3 border bg-primary text-primary-foreground border-primary rounded-lg font-body font-semibold hover:opacity-90 transition-opacity"
+                  variant="brand"
+                  size="lg"
+                  className="w-full sm:w-auto"
                 >
                   Close
-                </button>
+                </BrandButton>
               </div>
             </div>
           </motion.div>

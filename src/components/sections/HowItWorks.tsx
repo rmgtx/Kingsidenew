@@ -153,7 +153,6 @@ export function HowItWorks() {
               href="#contact"
               variant="brand"
               size="lg"
-              className="text-lg px-10 py-6"
               rightIcon={<ArrowRight size={20} weight="bold" />}
             >
               Start Your Roadmap

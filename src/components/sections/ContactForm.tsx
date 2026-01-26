@@ -203,7 +203,7 @@ export function ContactForm() {
                   </div>
 
                   <div className="pt-4">
-                    <BrandButton type="submit" variant="brand" aria-label="Send message">
+                    <BrandButton type="submit" variant="brand" size="lg" aria-label="Send message">
                       {isSubmitting ? "Sending..." : "Send message"}
                     </BrandButton>
                   </div>

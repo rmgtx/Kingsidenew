@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { FacebookLogo, InstagramLogo, LinkedinLogo, Envelope } from "@phosphor-icons/react";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 import { PrivacyPolicyModal } from "@/components";
 
 export function Footer() {
@@ -135,12 +136,13 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/50">
           <p>© {currentYear} Kingside Group. All rights reserved.</p>
           <div className="flex gap-6">
-            <button
+            <Button
               onClick={() => setIsPrivacyOpen(true)}
-              className="hover:text-primary-foreground transition-colors cursor-pointer"
+              variant="link"
+              className="text-primary-foreground/50 hover:text-primary-foreground p-0 h-auto"
             >
               Privacy Policy
-            </button>
+            </Button>
             <a href="#" className="hover:text-primary-foreground transition-colors">Terms of Service</a>
           </div>
         </div>

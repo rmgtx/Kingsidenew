@@ -108,7 +108,7 @@ export function Navigation() {
                   <BrandButton
                     href="#contact"
                     variant="brand"
-                    size="default"
+                    size="lg"
                     aria-label="Book a Call"
                   >
                     Book a Call

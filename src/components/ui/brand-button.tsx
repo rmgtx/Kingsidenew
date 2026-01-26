@@ -11,7 +11,6 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import type { VariantProps } from "class-variance-authority"
 
-const SPRING = { mass: 0.9, stiffness: 420, damping: 40 }
 const FILL_SPRING = { mass: 0.8, stiffness: 260, damping: 26 }
 
 type ButtonBaseProps = VariantProps<typeof buttonVariants> & {
@@ -39,7 +38,7 @@ export type BrandButtonProps = ButtonAsButton | ButtonAsAnchor
 /**
  * BrandButton (shadcn-first)
  * - Uses shadcn buttonVariants for baseline sizing/variants/focus/disabled.
- * - Adds: radial fill on hover (accent), cursor-follow parallax, sheen, micro-press.
+ * - Adds: radial fill on hover (accent), sheen sweep, micro-press.
  * - Works as <button> or <a href>.
  */
 export const BrandButton = React.forwardRef<
@@ -59,13 +58,6 @@ export const BrandButton = React.forwardRef<
 
   const reduceMotion = useReducedMotion()
   const motionEnabled = !disableMotion && !reduceMotion && !disabled
-
-  // Cursor-follow parallax (very subtle ±2px)
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  const xSpring = useSpring(x, SPRING)
-  const ySpring = useSpring(y, SPRING)
-  const transform = useMotionTemplate`translate3d(${xSpring}px, ${ySpring}px, 0)`
 
   // Radial fill (liquid accent hover effect)
   const fillX = useMotionValue(0)
@@ -97,12 +89,6 @@ export const BrandButton = React.forwardRef<
     const el = e.currentTarget
     const r = el.getBoundingClientRect()
 
-    // Parallax (normalized -0.5..0.5 → ±2px)
-    const px = (e.clientX - r.left) / r.width - 0.5
-    const py = (e.clientY - r.top) / r.height - 0.5
-    x.set(px * 2)
-    y.set(py * 2)
-
     // Track fill origin to cursor position
     const localX = e.clientX - r.left
     const localY = e.clientY - r.top
@@ -111,8 +97,6 @@ export const BrandButton = React.forwardRef<
   }
 
   const reset = () => {
-    x.set(0)
-    y.set(0)
     fillR.set(0)
   }
 
@@ -167,26 +151,9 @@ export const BrandButton = React.forwardRef<
 
       {/* Text content (z-10 so it's above fill layers) */}
       <span className="relative z-10 inline-flex items-center gap-2">
-        <span
-          className={cn(
-            "transition-transform duration-200",
-            "group-hover:-translate-y-0.5",
-            "group-active:translate-y-0"
-          )}
-        >
-          {children}
-        </span>
+        <span>{children}</span>
         {rightIcon ? (
-          <span
-            className={cn(
-              "inline-flex items-center",
-              "transition-transform duration-200",
-              "group-hover:translate-x-0.5",
-              "group-active:translate-x-0"
-            )}
-          >
-            {rightIcon}
-          </span>
+          <span className="inline-flex items-center">{rightIcon}</span>
         ) : null}
       </span>
     </>
@@ -202,7 +169,6 @@ export const BrandButton = React.forwardRef<
   return (
     <motion.div
       className="group inline-flex"
-      style={motionEnabled ? { transform } : undefined}
       onPointerEnter={handleEnter}
       onPointerMove={handleMove}
       onPointerLeave={reset}
