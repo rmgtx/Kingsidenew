@@ -1,25 +1,28 @@
 import { BrandButton, GridPattern } from "@/components";
-import { CalendarCheck, ChatCircleDots, ClipboardText } from "@phosphor-icons/react";
+import { Scan, Cpu, GitBranch, ArrowRight } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 
 const steps = [
   {
-    number: "1",
-    title: "Book Call",
-    description: "Schedule a free consultation to discuss your business needs and goals.",
-    icon: CalendarCheck,
+    number: "01",
+    title: "The Audit",
+    description:
+      "We pop the hood on your business. We analyze your current stack, identify the bottlenecks, and design a fractional AI roadmap tailored to your goals.",
+    icon: Scan,
   },
   {
-    number: "2",
-    title: "Tell Us Your Needs",
-    description: "Share your challenges and objectives so we can understand your unique requirements.",
-    icon: ChatCircleDots,
+    number: "02",
+    title: "The Build",
+    description:
+      "We engineer the solution. Whether it's custom apps or agent workflows, we build the infrastructure required to bridge your disconnected tools.",
+    icon: Cpu,
   },
   {
-    number: "3",
-    title: "Get Your Customized Plan",
-    description: "Receive a tailored automation strategy designed specifically for your business.",
-    icon: ClipboardText,
+    number: "03",
+    title: "The Orchestration",
+    description:
+      "We hand you the keys to MagnusAI. Deploy your agents, monitor performance, and scale your automated workforce from a single dashboard.",
+    icon: GitBranch,
   },
 ];
 
@@ -39,7 +42,7 @@ const itemVariants = {
 
 export function HowItWorks() {
   return (
-    <section className="relative overflow-hidden bg-background py-24 lg:py-32">
+    <section className="relative overflow-hidden bg-background py-24 lg:py-32 border-b border-border">
       {/* Grid Pattern Background (Static) */}
       <div className="absolute inset-0 z-0">
         <GridPattern
@@ -70,7 +73,7 @@ export function HowItWorks() {
             transition={{ duration: 0.5 }}
             className="text-sm font-medium tracking-widest uppercase font-body text-accent mb-6"
           >
-            Simple Process
+            The Process
           </motion.div>
 
           <motion.h2
@@ -78,20 +81,10 @@ export function HowItWorks() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl font-bold tracking-tight font-heading text-foreground sm:text-5xl lg:text-6xl mb-6"
+            className="text-4xl font-bold tracking-tight font-heading text-foreground sm:text-5xl lg:text-6xl"
           >
-            How It Works
+            From Blueprint to Breakthrough
           </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mx-auto max-w-2xl text-lg font-body text-muted-foreground"
-          >
-            From consultation to implementation in three simple steps.
-          </motion.p>
         </div>
 
         {/* Timeline & Cards Container */}
@@ -102,12 +95,12 @@ export function HowItWorks() {
           viewport={{ once: true }}
           className="relative"
         >
-          {/* Connector Line (Desktop) */}
-          <div className="absolute top-8 left-0 w-full hidden lg:block" aria-hidden="true">
-            <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+          {/* Gradient Connector Line (Desktop) - runs through icon level */}
+          <div className="absolute top-[56px] left-0 w-full hidden lg:block z-0" aria-hidden="true">
+            <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-accent to-transparent" />
           </div>
 
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8">
+          <div className="relative z-10 grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8">
             {steps.map((step) => {
               const Icon = step.icon;
               return (
@@ -116,24 +109,30 @@ export function HowItWorks() {
                   variants={itemVariants}
                   className="relative flex flex-col items-center text-center"
                 >
-                  {/* Number Circle */}
-                  <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border-4 border-background bg-accent/80 backdrop-blur-sm text-xl font-bold font-heading text-accent-foreground shadow-xl ring-4 ring-secondary mb-8">
-                    {step.number}
-                  </div>
-
-                  {/* Card Content - Removed Hover Effects */}
-                  <div className="relative w-full h-full rounded-xl border border-border bg-card p-8 shadow-sm">
-                    <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-accent">
-                      <Icon size={24} weight="fill" />
+                  {/* Card with Watermark Number */}
+                  <div className="relative w-full h-full rounded-xl border border-border bg-card p-8 shadow-sm overflow-hidden">
+                    {/* Watermark Number */}
+                    <div
+                      className="absolute -top-8 -right-4 text-[150px] font-bold font-heading text-border/30 leading-none select-none pointer-events-none"
+                      aria-hidden="true"
+                    >
+                      {step.number}
                     </div>
 
-                    <h3 className="text-xl font-bold font-heading text-foreground mb-3">
-                      {step.title}
-                    </h3>
+                    {/* Card Content */}
+                    <div className="relative z-10">
+                      <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-accent">
+                        <Icon size={24} weight="fill" />
+                      </div>
 
-                    <p className="font-body text-muted-foreground leading-relaxed">
-                      {step.description}
-                    </p>
+                      <h3 className="text-xl font-bold font-heading text-foreground mb-3">
+                        {step.title}
+                      </h3>
+
+                      <p className="font-body text-muted-foreground leading-relaxed">
+                        {step.description}
+                      </p>
+                    </div>
                   </div>
                 </motion.div>
               );
@@ -155,11 +154,12 @@ export function HowItWorks() {
               variant="brand"
               size="lg"
               className="text-lg px-10 py-6"
+              rightIcon={<ArrowRight size={20} weight="bold" />}
             >
-              Get Started
+              Start Your Roadmap
             </BrandButton>
             <p className="text-sm font-body text-muted-foreground">
-              Ready to automate? Book your call today.
+              Begin with a free discovery call.
             </p>
           </div>
         </motion.div>

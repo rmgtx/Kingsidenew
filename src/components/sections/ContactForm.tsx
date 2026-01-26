@@ -66,7 +66,7 @@ export function ContactForm() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden scroll-mt-12 pt-12 pb-24 lg:pt-16 lg:pb-32 px-5 sm:px-6 lg:px-8 bg-background"
+      className="relative overflow-hidden scroll-mt-12 pt-12 pb-24 lg:pt-16 lg:pb-32 px-5 sm:px-6 lg:px-8 bg-background border-b border-border"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}

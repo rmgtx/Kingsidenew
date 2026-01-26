@@ -40,7 +40,7 @@ export function WhyKingside() {
     const { ref, inView } = useScrollReveal({ amount: 0.25, once: true });
 
     return (
-        <section className="relative w-full bg-white overflow-hidden">
+        <section className="relative w-full bg-white overflow-hidden border-b border-border">
             {/* Left edge gradient */}
             <div
                 className="absolute inset-y-0 left-0 w-24 sm:w-32 lg:w-48 bg-gradient-to-r from-accent/10 to-transparent pointer-events-none"
