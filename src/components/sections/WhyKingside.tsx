@@ -11,12 +11,12 @@ const features = [
     {
         icon: Code,
         title: "Application Development",
-        desc: "We build the infrastructure that powers growth. Whether it's CRM implementation or custom software, we develop the tactical tools your strategy requires."
+        desc: "We build the infrastructure that powers growth. We develop the tactical tools your strategy requires—including AI-powered content engines, intelligent chat systems, and custom software aimed at driving real results."
     },
     {
         icon: Robot,
         title: "Agent Management",
-        desc: "Scale your capacity without the chaos. Leverage our central dashboard to deploy pre-built agents, automate workflows, and track real-time business intelligence."
+        desc: "Scale your capacity without the chaos. Deploy pre-built or fully custom E2E AI agents that handle your business operations with precision and efficiency."
     }
 ];
 
@@ -74,7 +74,7 @@ Build momentum with intelligent AI Orchestration.                    </motion.h2
                         transition={{ duration: 0.55, ease: "easeOut" }}
                         className="mt-5 text-base leading-relaxed text-neutral-500 sm:text-lg"
                     >
-We help organizations overwhelmed by disconnected tools build and deploy scalable solutions that turn technology into a strategic advantage. Our approach blends human-centered design and pragmatic AI to deliver real outcomes—not just output.                    </motion.p>
+Harmonize your fragmented tech stack into an AI-powered, unified operational engine. We replace tool fatigue with seamless, intelligent workflows that route complex tasks to the right resources—human or machine. Our approach ensures your technology acts as a strategic force that drives business efficiency, not just IT complexity.                    </motion.p>
                 </motion.div>
 
                 {/* Center the grid and constrain width so it doesn't feel crowded */}

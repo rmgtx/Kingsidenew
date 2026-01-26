@@ -61,7 +61,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-xs sm:text-sm font-medium tracking-widest uppercase text-sky-500 mb-6"
             >
-              Put your busy work in check.
+              Put your busy work in check
             </motion.p>
 
             {/* Main headline */}
