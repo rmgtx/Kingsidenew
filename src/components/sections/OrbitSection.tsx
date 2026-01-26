@@ -26,11 +26,11 @@ export function OrbitSection() {
         <div className="max-w-4xl space-y-4 relative z-20">
           {/* Eyebrow Text */}
           <p className="text-xs sm:text-sm font-medium tracking-wide uppercase text-accent">
-            Open-Ecosystem Integration
+            motion without momentum
           </p>
 
           <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
-            Turn isolated apps into an intelligent engine.
+          Your tools are drifting in silos, not driving you forward.
           </h2>
         </div>
       </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import { BrandButton } from "@/components";
 import { motion, useInView } from "motion/react";
 import { Crosshair, PlusCircle, FileText } from "phosphor-react";
 
@@ -41,9 +40,21 @@ export function WhyKingside() {
     const { ref, inView } = useScrollReveal({ amount: 0.25, once: true });
 
     return (
-        <section className="w-full bg-white">
+        <section className="relative w-full bg-white overflow-hidden">
+            {/* Left edge gradient */}
+            <div
+                className="absolute inset-y-0 left-0 w-24 sm:w-32 lg:w-48 bg-gradient-to-r from-accent/10 to-transparent pointer-events-none"
+                aria-hidden="true"
+            />
+
+            {/* Right edge gradient */}
+            <div
+                className="absolute inset-y-0 right-0 w-24 sm:w-32 lg:w-48 bg-gradient-to-l from-accent/10 to-transparent pointer-events-none"
+                aria-hidden="true"
+            />
+
             {/* Extra top padding creates breathing room from the Hero */}
-            <div className="mx-auto max-w-6xl px-6 pt-16 pb-24 sm:pt-20 sm:pb-28">
+            <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-24 sm:pt-20 sm:pb-28">
                 <motion.div
                     ref={ref}
                     variants={container}
@@ -66,21 +77,6 @@ export function WhyKingside() {
                     >
                         Leverage data-driven strategies and market analysis to identify opportunities, enhance performance, and foster sustainable growth for your business.
                     </motion.p>
-
-                    <motion.div
-                        variants={item}
-                        transition={{ duration: 0.55, ease: "easeOut" }}
-                        className="mt-8 flex items-center justify-center"
-                    >
-                        <BrandButton
-                            href="#contact"
-                            variant="brand"
-                            size="lg"
-                            aria-label="Contact us"
-                        >
-                            Contact us
-                        </BrandButton>
-                    </motion.div>
                 </motion.div>
 
                 {/* Center the grid and constrain width so it doesn't feel crowded */}

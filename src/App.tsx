@@ -2,11 +2,8 @@ import { Toaster } from 'sonner';
 import {
   Navigation,
   Hero,
-  HeroStats,
-  ProblemStatement,
-  WhyKingside,
-  InfoCardsSection,
   OrbitSection,
+  WhyKingside,
   HowItWorks,
   ContactForm,
   Footer
@@ -18,11 +15,8 @@ function App() {
     <main className="min-h-screen bg-background text-foreground">
       <Navigation />
       <Hero />
-      <ProblemStatement />
-      <HeroStats />
-      <WhyKingside />
-      <InfoCardsSection />
       <OrbitSection />
+      <WhyKingside />
       <HowItWorks />
       <ContactForm />
       <Footer />
