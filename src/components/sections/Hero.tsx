@@ -61,7 +61,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-xs sm:text-sm font-medium tracking-widest uppercase text-sky-500 mb-6"
             >
-              AI Automation for Growth-Minded Founders
+              Put your busy work in check.
             </motion.p>
 
             {/* Main headline */}
@@ -71,7 +71,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6"
             >
-              Stop Playing Defense. Put Your Busywork in Check.
+              Your business is unique. Your AI should be too.
             </motion.h1>
 
             {/* Subheadline */}
@@ -81,7 +81,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-10"
             >
-              You didn't start a business to drown in spreadsheets. We build intelligent AI agents that handle the admin, operations, and repetitive grind so you can focus on the moves that actually scale revenue.
+              Kingside transforms messy operations into reliable AI systems that bridge the gap between custom software and human adoption.
             </motion.p>
 
             {/* CTAs */}

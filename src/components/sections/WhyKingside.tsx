@@ -1,22 +1,22 @@
 import React from "react";
 import { motion, useInView } from "motion/react";
-import { Crosshair, PlusCircle, FileText } from "phosphor-react";
+import { Strategy, Code, Robot } from "@phosphor-icons/react";
 
 const features = [
     {
-        icon: Crosshair,
-        title: "Strategic decision making",
-        desc: "Harness the power of analytics to inform strategies, enabling targeted campaigns that resonate with your audience and drive results."
+        icon: Strategy,
+        title: "Advisory & Planning",
+        desc: "Eliminate the guesswork. From team workshops to deep-dive audits, we design a comprehensive roadmap that prepares your organization for scalable automation."
     },
     {
-        icon: PlusCircle,
-        title: "Marketing automation",
-        desc: "Harness the power of analytics to inform strategies, enabling targeted campaigns that resonate with your audience and drive results."
+        icon: Code,
+        title: "Application Development",
+        desc: "We build the infrastructure that powers growth. Whether it's CRM implementation or custom software, we develop the tactical tools your strategy requires."
     },
     {
-        icon: FileText,
-        title: "Content Creation",
-        desc: "Adopt a responsive content strategy that evolves with market trends, allowing timely updates that capture audience interest and engagement."
+        icon: Robot,
+        title: "Agent Management",
+        desc: "Scale your capacity without the chaos. Leverage our central dashboard to deploy pre-built agents, automate workflows, and track real-time business intelligence."
     }
 ];
 
@@ -67,16 +67,14 @@ export function WhyKingside() {
                         transition={{ duration: 0.55, ease: "easeOut" }}
                         className="text-4xl font-semibold tracking-tight text-neutral-900 sm:text-6xl leading-tight"
                     >
-                        Why Top Companies Choose Kingside
-                    </motion.h2>
+Build momentum with intelligent AI Orchestration.                    </motion.h2>
 
                     <motion.p
                         variants={item}
                         transition={{ duration: 0.55, ease: "easeOut" }}
                         className="mt-5 text-base leading-relaxed text-neutral-500 sm:text-lg"
                     >
-                        Leverage data-driven strategies and market analysis to identify opportunities, enhance performance, and foster sustainable growth for your business.
-                    </motion.p>
+We help organizations overwhelmed by disconnected tools build and deploy scalable solutions that turn technology into a strategic advantage. Our approach blends human-centered design and pragmatic AI to deliver real outcomes—not just output.                    </motion.p>
                 </motion.div>
 
                 {/* Center the grid and constrain width so it doesn't feel crowded */}
