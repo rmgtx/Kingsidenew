@@ -59,7 +59,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-xs sm:text-sm font-medium tracking-widest uppercase text-sky-500 mb-6"
+              className="text-xs sm:text-sm font-medium tracking-widest uppercase text-accent mb-6"
             >
               Put your busy work in check
             </motion.p>

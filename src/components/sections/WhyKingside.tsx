@@ -94,8 +94,8 @@ Harmonize your fragmented tech stack into an AI-powered, unified operational eng
                                 transition={{ duration: 0.5, ease: "easeOut" }}
                                 className="mx-auto w-full max-w-sm text-center sm:text-left"
                             >
-                                <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full border border-sky-200 sm:mx-0">
-                                    <Icon size={20} weight="regular" className="text-sky-500" />
+                                <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full border border-accent/30 sm:mx-0">
+                                    <Icon size={20} weight="regular" className="text-accent" />
                                 </div>
 
                                 <h3 className="text-xl font-semibold tracking-tight text-neutral-900">
